@@ -458,4 +458,4 @@ MIT License - see LICENSE file for details.
 
 ---
 
-Made by Daniel Fischer for the Claude Code community
+All credit goes to Jeffrey Emanuel (Dicklesworthstone)
