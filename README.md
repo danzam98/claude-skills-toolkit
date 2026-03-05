@@ -2,6 +2,8 @@
 
 A comprehensive collection of 30 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
+All skills created by Jeffrey Emanuel ([JeffreysPrompts.com](https://jeffreysprompts.com))
+
 ## Quick Install
 
 ### Install All Skills
@@ -18,6 +20,17 @@ cd claude-skills-toolkit
 git clone https://github.com/danzam98/claude-skills-toolkit.git
 cd claude-skills-toolkit
 install.bat
+```
+
+### Installer Options
+
+```bash
+./install.sh                         # Install all skills (interactive)
+./install.sh --all --force           # Install all, overwrite existing
+./install.sh fresh-eyes bug-hunt     # Install specific skills
+./install.sh -f peer-review          # Install with overwrite
+./install.sh --list                  # List available skills
+./install.sh --help                  # Show help
 ```
 
 ### Install Individual Skills
@@ -43,7 +56,7 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 
 ## Skills Reference
 
-### Code Quality & Review (7 skills)
+### Code Quality & Review (6 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
@@ -53,7 +66,6 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **Peer Review** | `/peer-review` | Structured code review covering bugs, security, performance, style, and testing |
 | **Peer Code Reviewer** | `/peer-code-reviewer` | Cross-agent code review to catch issues from parallel work streams |
 | **Plan Review** | `/plan-review` | Validate implementation plans to catch errors and bad assumptions before coding |
-| **Simplify** | `/simplify` | Review changed code for reuse, quality, and efficiency, then fix issues found |
 
 ### Ideation & Planning (6 skills)
 
@@ -301,9 +313,3 @@ Found a bug? Have an improvement? Edit the skill.md files and submit a PR.
 ## License
 
 MIT License - see LICENSE file for details.
-
----
-
-## Credits
-
-Skills created by Jeffrey Emanuel ([JeffreysPrompts.com](https://jeffreysprompts.com))
