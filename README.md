@@ -1,12 +1,119 @@
 # Claude Skills Toolkit
 
-A collection of powerful quality-assurance and development workflow skills for Claude Code that help you write better code, catch bugs early, and plan more effectively.
+A comprehensive collection of 30 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
-## What's Included
+## Quick Install
 
-This toolkit includes **8 powerful skills** that integrate seamlessly with Claude Code:
+### Install All Skills
 
-### 1. Fresh Eyes - Automated Code Review
+**Mac/Linux:**
+```bash
+git clone https://github.com/danzam98/claude-skills-toolkit.git
+cd claude-skills-toolkit
+./install.sh
+```
+
+**Windows:**
+```cmd
+git clone https://github.com/danzam98/claude-skills-toolkit.git
+cd claude-skills-toolkit
+install.bat
+```
+
+### Install Individual Skills
+
+**Mac/Linux:**
+```bash
+# One-liner to install a specific skill (replace SKILL_NAME)
+mkdir -p ~/.claude/skills/SKILL_NAME && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/SKILL_NAME/SKILL.md -o ~/.claude/skills/SKILL_NAME/SKILL.md
+
+# Examples:
+mkdir -p ~/.claude/skills/fresh-eyes && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md
+mkdir -p ~/.claude/skills/bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bug-hunt/SKILL.md -o ~/.claude/skills/bug-hunt/SKILL.md
+```
+
+**Or clone and copy specific skills:**
+```bash
+git clone https://github.com/danzam98/claude-skills-toolkit.git
+cp -r claude-skills-toolkit/skills/fresh-eyes ~/.claude/skills/
+cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
+```
+
+---
+
+## Skills Reference
+
+### Code Quality & Review (7 skills)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **Fresh Eyes** | `/fresh-eyes` | Automated code review that catches bugs, security issues, and logic errors before they ship |
+| **Bug Hunt** | `/bug-hunt` | Deep codebase investigation to find hidden bugs, security holes, and performance issues |
+| **Bug Hunter** | `/bug-hunter` | Randomly explore and trace code execution flows to find obvious mistakes and issues |
+| **Peer Review** | `/peer-review` | Structured code review covering bugs, security, performance, style, and testing |
+| **Peer Code Reviewer** | `/peer-code-reviewer` | Cross-agent code review to catch issues from parallel work streams |
+| **Plan Review** | `/plan-review` | Validate implementation plans to catch errors and bad assumptions before coding |
+| **Simplify** | `/simplify` | Review changed code for reuse, quality, and efficiency, then fix issues found |
+
+### Ideation & Planning (6 skills)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **Idea Wizard** | `/idea-wizard` | Generate and evaluate improvement ideas with data-driven prioritization |
+| **100-to-10 Filter** | `/hundred-to-ten-filter` | Generate 100 ideas, then ruthlessly filter to the 10 most brilliant |
+| **PRD Generator** | `/prd` | Generate comprehensive Product Requirements Documents for features and projects |
+| **Premortem Planner** | `/premortem-planner` | Imagine failure 6 months out and revise the plan to prevent it |
+| **Project Opinion** | `/project-opinion-elicitor` | Get honest, critical assessment of the project from the agent's perspective |
+| **System Weaknesses** | `/system-weaknesses` | Identify the weakest parts of the system that need improvement |
+
+### Refactoring & Optimization (6 skills)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **Code Reorganizer** | `/code-reorganizer` | Restructure scattered code files into a sensible, intuitive folder structure |
+| **Deep Performance Audit** | `/deep-performance-audit` | Systematic identification of optimization opportunities with proof requirements |
+| **Stripe-Level UI** | `/stripe-level-ui` | Build world-class, polished UI/UX components with intense focus on visual appeal |
+| **Stub Eliminator** | `/stub-eliminator` | Replace all stubs, placeholders, and mocks with production-ready code |
+| **De-Slopify** | `/de-slopify` | Remove telltale AI writing patterns from documentation and text |
+| **Multi-Model Synthesis** | `/multi-model-synthesis` | Blend competing LLM outputs into a superior hybrid plan |
+
+### Testing & Deployment (3 skills)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **E2E Pipeline Validator** | `/e2e-pipeline-validator` | Prove the entire system works with real data, no mocks allowed |
+| **Deployment Verifier** | `/deployment-verifier` | Verify live deployment works with automated browser testing |
+| **Gemini Research** | `/gemini-grounded-research` | Web-backed research using Gemini with Google Search grounding |
+
+### Automation & Agents (5 skills)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **Agent Swarm Launcher** | `/agent-swarm-launcher` | Initialize multiple agents with full context and coordination protocols |
+| **Robot Mode Maker** | `/robot-mode-maker` | Create an agent-optimized CLI interface for any project |
+| **CLI Error Tolerance** | `/cli-error-tolerance` | Make CLI tools forgiving of minor syntax issues for agent ergonomics |
+| **Git Committer** | `/git-committer` | Intelligently commit all changed files in logical groupings with detailed messages |
+| **Ralph** | `/ralph` | Convert PRDs to JSON format for the Ralph autonomous agent system |
+
+### Workflow & Documentation (3 skills)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **Deep Project Primer** | `/deep-project-primer` | Essential first step to fully understand a project before any work |
+| **README Reviser** | `/readme-reviser` | Update documentation for recent changes, framing them as how it always was |
+| **BD to BR Migration** | `/bd-to-br-migration` | Migrate docs from bd (beads) to br (beads_rust) |
+
+### Infrastructure (1 skill)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **RCH** | `/rch` | Remote compilation helper for offloading cargo/gcc/bun builds to workers |
+
+---
+
+## Detailed Skill Descriptions
+
+### Fresh Eyes - Automated Code Review
 Automatically review your code changes to catch bugs before they ship.
 
 **When to use:**
@@ -19,399 +126,175 @@ Automatically review your code changes to catch bugs before they ship.
 - Missing null checks and error handling
 - Security vulnerabilities (SQL injection, XSS, auth bypass)
 - Performance issues (N+1 queries, unnecessary loops)
-- Code that doesn't match requirements
 
-**Example:**
 ```
 /fresh-eyes
 ```
 
-**Benefits:**
-- **Saves time**: Catches bugs in seconds that might take hours to debug later
-- **Learns your patterns**: Understands your codebase conventions
-- **Auto-fixes**: Doesn't just report issues, fixes them immediately
-- **Cost-effective**: Prevents expensive production bugs
-
 ---
 
-### 2. Bug Hunt - Deep Codebase Investigation
+### Bug Hunt - Deep Codebase Investigation
 Proactively explore your codebase to find hidden bugs, security holes, and performance issues.
 
 **When to use:**
 - Before major releases
 - When investigating reliability issues
 - For security audits
-- When inheriting unfamiliar code
 
-**What it finds:**
-- **Security**: SQL injection, XSS, CSRF, auth bypass, data exposure
-- **Performance**: N+1 queries, missing indexes, memory leaks
-- **Reliability**: Missing error handling, race conditions, bad assumptions
-- **Bugs**: Logic errors, null handling, edge cases
-
-**Example:**
 ```
-/bug-hunt                           # Explore entire codebase
-/bug-hunt app/auth                  # Focus on authentication code
-/bug-hunt --security                # Prioritize security issues
+/bug-hunt                    # Explore entire codebase
+/bug-hunt app/auth           # Focus on specific area
 ```
-
-**Benefits:**
-- **Proactive**: Finds bugs before users do
-- **Systematic**: Traces execution flows and checks edge cases
-- **Prioritized**: Categorizes issues by severity (HIGH/MEDIUM/LOW)
-- **Actionable**: Provides specific fixes for each issue
 
 ---
 
-### 3. Idea Wizard - Structured Brainstorming
+### Idea Wizard - Structured Brainstorming
 Generate and evaluate improvement ideas for your project with data-driven prioritization.
 
-**When to use:**
-- Planning new features or improvements
-- Optimizing performance or UX
-- Quarterly planning or roadmap creation
-- When stuck on how to improve something
-
 **How it works:**
-1. Generates 30 diverse ideas across categories (performance, UX, security, reliability)
+1. Generates 30 diverse ideas across categories
 2. Evaluates each on effort vs. impact
 3. Winnows to top 5 with detailed rationale
 4. Offers to implement the best idea
 
-**Example:**
 ```
-/idea-wizard                                    # General improvements
-/idea-wizard "checkout flow"                    # Specific feature
-/idea-wizard --focus performance                # Specific area
+/idea-wizard                         # General improvements
+/idea-wizard "checkout flow"         # Specific feature
 ```
-
-**Benefits:**
-- **Comprehensive**: Considers all aspects (robustness, performance, UX, security)
-- **Data-driven**: Scores ideas on impact/effort ratio
-- **Actionable**: Provides implementation approach for each idea
-- **Strategic**: Balances quick wins with long-term improvements
 
 ---
 
-### 4. Plan Review - Pre-Implementation Validation
-Review implementation plans to catch errors and bad assumptions before you start coding.
+### Deep Performance Audit
+Systematic identification of optimization opportunities with proof requirements.
 
-**When to use:**
-- After creating a plan in plan mode
-- Before starting complex implementations
-- When reviewing architecture decisions
-- For critical features that need extra scrutiny
+**Methodology:**
+- Baseline metrics first (p50/p95/p99 latency, throughput)
+- Profile before proposing changes
+- Isomorphism proof per change
+- One optimization per change for clear attribution
 
-**What it checks:**
-- **Logic**: Is the approach sound? Any contradictions?
-- **Assumptions**: What are we assuming? Are they valid?
-- **Completeness**: Are all steps present? Missing dependencies?
-- **Risks**: What could go wrong? How do we recover?
-- **Verification**: How will we know if it works?
-
-**Example:**
 ```
-/plan-review                    # Review current plan
-/plan-review plan.md            # Review specific file
-/plan-review --passes 3         # Multiple review passes
+/deep-performance-audit
 ```
-
-**Benefits:**
-- **Prevents wasted effort**: Catches plan errors before implementation
-- **Iterative refinement**: Multiple passes until "steady state"
-- **Risk mitigation**: Identifies and documents risks upfront
-- **Better estimates**: Complete plans lead to accurate timelines
 
 ---
 
-### 5. Peer Review - Senior Engineer Feedback
-Structured code review covering bugs, security, performance, style, and testing—like a senior engineer reviewing your PR.
-
-**When to use:**
-- Before submitting pull requests
-- When you want comprehensive feedback
-- For critical code paths (auth, payments, data processing)
-- To learn best practices and patterns
-
-**Review aspects:**
-- **Bugs & Logic**: Correctness, edge cases, error handling
-- **Security**: Input validation, SQL injection, XSS, auth/authz
-- **Performance**: Database queries, algorithm complexity, caching
-- **Style**: Readability, patterns, documentation
-- **Testing**: Coverage, quality, edge cases
-
-**Example:**
-```
-/peer-review                    # Review recent changes
-/peer-review src/auth.ts        # Review specific file
-/peer-review --pr 123           # Review GitHub PR
-/peer-review --security         # Focus on security
-```
-
-**Benefits:**
-- **Comprehensive**: Covers all aspects of code quality
-- **Learning tool**: Explains why issues matter and how to fix them
-- **Severity-based**: Prioritizes blocking issues over nitpicks
-- **Production-ready**: Ensures code meets professional standards
-
----
-
-### 6. Gemini Grounded Research - Web-Backed Research
+### Gemini Grounded Research
 Research using Gemini with Google Search grounding for real-time, citation-backed answers.
 
-**When to use:**
-- Researching current technologies or APIs
-- Comparing tools or frameworks
-- Checking latest features or documentation
-- Fact-checking or staying current with 2026 changes
+**Requirements:** Set `GEMINI_API_KEY` environment variable
 
-**Example:**
-```
-/gemini-grounded-research "What are Slack's collaborative to-do features in 2026?"
-/gemini-grounded-research "Compare Stripe vs PayPal payment APIs"
+```bash
+# Get free API key: https://aistudio.google.com/apikey
+export GEMINI_API_KEY="your-key-here"
 ```
 
-**Benefits:**
-- **Current information**: Uses real-time web search
-- **Cited sources**: Every fact includes web citations
-- **Fast**: Returns comprehensive answers in seconds
-- **Reliable**: Backed by Google Search grounding
-
-**Requirements:**
-- Requires `GEMINI_API_KEY` environment variable
-- Get free API key at: https://aistudio.google.com/apikey
+```
+/gemini-grounded-research "What are the latest React 19 features?"
+```
 
 ---
 
-### 7. PRD - Product Requirements Document Generator
-Generate comprehensive Product Requirements Documents for new features and projects.
-
-**When to use:**
-- Planning a new feature or product
-- Starting a new project
-- Creating specifications for development
-- Communicating requirements to stakeholders
-
-**Example:**
-```
-/prd
-/prd "user authentication system"
-/prd "mobile app redesign"
-```
-
-**What it generates:**
-- Problem statement and goals
-- User stories and use cases
-- Technical requirements and constraints
-- Success metrics and acceptance criteria
-- Implementation timeline and milestones
-
-**Benefits:**
-- **Structured thinking**: Forces clear problem definition
-- **Stakeholder alignment**: Creates shared understanding
-- **Scope clarity**: Prevents feature creep
-- **Better estimates**: Complete requirements = accurate timelines
-
----
-
-### 8. Ralph - PRD to JSON Converter
-Convert PRDs into structured JSON format for the Ralph autonomous agent system.
-
-**When to use:**
-- After creating a PRD with /prd
-- When integrating with Ralph autonomous agents
-- For programmatic processing of requirements
-- To feed specifications into automation pipelines
-
-**Example:**
-```
-/ralph
-/ralph prd.md
-```
-
-**What it generates:**
-- Structured JSON with goals, requirements, and acceptance criteria
-- Format compatible with Ralph agent system
-- Machine-readable specification
-- Validation of PRD completeness
-
-**Benefits:**
-- **Automation ready**: Enables autonomous agent workflows
-- **Consistency**: Ensures all required fields are present
-- **Integration**: Works with Ralph and other tools
-- **Quality check**: Validates PRD structure
-
----
-
-## Installation
-
-### Quick Start (Recommended)
-
-1. Clone or download this repository:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/claude-skills-toolkit.git
-   cd claude-skills-toolkit
-   ```
-
-### For Mac/Linux:
-
-2. Run the installer:
-   ```bash
-   ./install.sh
-   ```
-
-### For Windows:
-
-2. Run the installer:
-   ```
-   install.bat
-   ```
-
-The installer will:
-
-### For Mac/Linux:
-
-1. Download this toolkit
-2. Run the installer:
-   ```bash
-   chmod +x install-mac.sh
-   ./install-mac.sh
-   ```
-
-### For Windows:
-
-1. Download this toolkit
-2. Right-click `install-windows.bat` and select "Run as Administrator"
-
-The installer will:
-- Copy all skills to `~/.claude/skills/`
-- Create necessary directories
-- Handle existing skills (prompt to overwrite or skip)
-- Show installation summary
-
----
-
-## How to Use
-
-After installation, use any skill by typing its command in Claude Code:
-
-```
-/fresh-eyes          # Review recent code changes
-/bug-hunt            # Hunt for bugs in codebase
-/idea-wizard         # Generate improvement ideas
-/plan-review         # Review implementation plan
-/peer-review         # Get senior engineer feedback
-/gemini-grounded-research "your question"
-/prd                 # Generate PRD for a feature
-/ralph               # Convert PRD to JSON
-```
-
-**Pro Tips:**
-1. **Use `/fresh-eyes` automatically**: Set up a git pre-commit hook to run it
-2. **Run `/bug-hunt` weekly**: Catch issues before they become problems
-3. **Start with `/idea-wizard`**: Before implementing, explore options
-4. **Review plans with `/plan-review`**: Save hours by catching errors early
-5. **Use `/peer-review` before PRs**: Get feedback before your team does
-
----
-
-## Workflow Integration
-
-### Test-First Bug Fixing
-```
-1. Report bug to Claude
-2. Claude writes test that reproduces it
-3. Test fails (proves bug exists)
-4. Run /fresh-eyes or /peer-review
-5. Fix is implemented
-6. Test passes (proves fix works)
-```
+## Workflow Examples
 
 ### Feature Development
 ```
-1. Run /idea-wizard to explore options
-2. Create implementation plan
-3. Run /plan-review to validate
-4. Implement the feature
-5. Run /fresh-eyes after each change
-6. Run /peer-review before committing
-7. Run /bug-hunt to catch edge cases
+1. /deep-project-primer     # Understand codebase
+2. /idea-wizard             # Explore options
+3. /prd                     # Document requirements
+4. /plan-review             # Validate approach
+5. [Implement feature]
+6. /fresh-eyes              # Quick check
+7. /peer-review             # Comprehensive review
+8. /git-committer           # Commit logically
 ```
 
-### Code Review Workflow
+### Pre-Release Audit
 ```
-1. Make changes to code
-2. Run /fresh-eyes (quick check)
-3. Run /peer-review (comprehensive check)
-4. Address blocking/high-severity issues
-5. Commit and push
-6. Team reviews (fewer issues to fix!)
+1. /bug-hunt                # Find hidden issues
+2. /stub-eliminator         # Ensure completeness
+3. /e2e-pipeline-validator  # Prove it works
+4. /deployment-verifier     # Test live deployment
+```
+
+### Multi-Agent Coordination
+```
+1. /agent-swarm-launcher    # Initialize agents
+2. [Agents work in parallel]
+3. /peer-code-reviewer      # Cross-review work
+4. /git-committer           # Commit all changes
 ```
 
 ---
 
-## Philosophy
+## Individual Installation Commands
 
-These skills are based on proven software engineering practices:
+Copy-paste these commands to install specific skills:
 
-1. **Fresh Eyes**: Human developers take breaks and review with "fresh eyes"—this automates that
-2. **Bug Hunt**: Like exploratory testing, but systematic and thorough
-3. **Idea Wizard**: Based on design thinking (diverge → evaluate → converge)
-4. **Plan Review**: "Measure twice, cut once"—validate plans before coding
-5. **Peer Review**: Simulates senior engineer review with structured checklist
-6. **Grounded Research**: Fact-checking with citations prevents hallucinations
-7. **PRD Generator**: Forces structured thinking and scope clarity upfront
-8. **Ralph Converter**: Bridges human documentation with automated agents
-
----
-
-## Configuration
-
-### Gemini Grounded Research Setup
-
-To use Gemini Grounded Research, you need a Gemini API key:
-
-1. Get a free API key: https://aistudio.google.com/apikey
-2. Add to your environment:
-
-**Mac/Linux:**
 ```bash
-echo 'export GEMINI_API_KEY="your-key-here"' >> ~/.zshrc
-source ~/.zshrc
+# Code Quality
+mkdir -p ~/.claude/skills/fresh-eyes && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md
+mkdir -p ~/.claude/skills/bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bug-hunt/SKILL.md -o ~/.claude/skills/bug-hunt/SKILL.md
+mkdir -p ~/.claude/skills/bug-hunter && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bug-hunter/SKILL.md -o ~/.claude/skills/bug-hunter/SKILL.md
+mkdir -p ~/.claude/skills/peer-review && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/peer-review/SKILL.md -o ~/.claude/skills/peer-review/SKILL.md
+mkdir -p ~/.claude/skills/peer-code-reviewer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/peer-code-reviewer/SKILL.md -o ~/.claude/skills/peer-code-reviewer/SKILL.md
+mkdir -p ~/.claude/skills/plan-review && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/plan-review/SKILL.md -o ~/.claude/skills/plan-review/SKILL.md
+
+# Ideation & Planning
+mkdir -p ~/.claude/skills/idea-wizard && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/idea-wizard/SKILL.md -o ~/.claude/skills/idea-wizard/SKILL.md
+mkdir -p ~/.claude/skills/hundred-to-ten-filter && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/hundred-to-ten-filter/SKILL.md -o ~/.claude/skills/hundred-to-ten-filter/SKILL.md
+mkdir -p ~/.claude/skills/prd && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/prd/SKILL.md -o ~/.claude/skills/prd/SKILL.md
+mkdir -p ~/.claude/skills/premortem-planner && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/premortem-planner/SKILL.md -o ~/.claude/skills/premortem-planner/SKILL.md
+mkdir -p ~/.claude/skills/project-opinion-elicitor && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/project-opinion-elicitor/SKILL.md -o ~/.claude/skills/project-opinion-elicitor/SKILL.md
+mkdir -p ~/.claude/skills/system-weaknesses && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/system-weaknesses/SKILL.md -o ~/.claude/skills/system-weaknesses/SKILL.md
+
+# Refactoring & Optimization
+mkdir -p ~/.claude/skills/code-reorganizer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/code-reorganizer/SKILL.md -o ~/.claude/skills/code-reorganizer/SKILL.md
+mkdir -p ~/.claude/skills/deep-performance-audit && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deep-performance-audit/SKILL.md -o ~/.claude/skills/deep-performance-audit/SKILL.md
+mkdir -p ~/.claude/skills/stripe-level-ui && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/stripe-level-ui/SKILL.md -o ~/.claude/skills/stripe-level-ui/SKILL.md
+mkdir -p ~/.claude/skills/stub-eliminator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/stub-eliminator/SKILL.md -o ~/.claude/skills/stub-eliminator/SKILL.md
+mkdir -p ~/.claude/skills/de-slopify && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/de-slopify/SKILL.md -o ~/.claude/skills/de-slopify/SKILL.md
+mkdir -p ~/.claude/skills/multi-model-synthesis && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/multi-model-synthesis/SKILL.md -o ~/.claude/skills/multi-model-synthesis/SKILL.md
+
+# Testing & Deployment
+mkdir -p ~/.claude/skills/e2e-pipeline-validator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/e2e-pipeline-validator/SKILL.md -o ~/.claude/skills/e2e-pipeline-validator/SKILL.md
+mkdir -p ~/.claude/skills/deployment-verifier && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deployment-verifier/SKILL.md -o ~/.claude/skills/deployment-verifier/SKILL.md
+mkdir -p ~/.claude/skills/gemini-grounded-research && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/gemini-grounded-research/SKILL.md -o ~/.claude/skills/gemini-grounded-research/SKILL.md
+
+# Automation & Agents
+mkdir -p ~/.claude/skills/agent-swarm-launcher && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/agent-swarm-launcher/SKILL.md -o ~/.claude/skills/agent-swarm-launcher/SKILL.md
+mkdir -p ~/.claude/skills/robot-mode-maker && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/robot-mode-maker/SKILL.md -o ~/.claude/skills/robot-mode-maker/SKILL.md
+mkdir -p ~/.claude/skills/cli-error-tolerance && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/cli-error-tolerance/SKILL.md -o ~/.claude/skills/cli-error-tolerance/SKILL.md
+mkdir -p ~/.claude/skills/git-committer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/git-committer/SKILL.md -o ~/.claude/skills/git-committer/SKILL.md
+mkdir -p ~/.claude/skills/ralph && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ralph/SKILL.md -o ~/.claude/skills/ralph/SKILL.md
+
+# Workflow & Documentation
+mkdir -p ~/.claude/skills/deep-project-primer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deep-project-primer/SKILL.md -o ~/.claude/skills/deep-project-primer/SKILL.md
+mkdir -p ~/.claude/skills/readme-reviser && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/readme-reviser/SKILL.md -o ~/.claude/skills/readme-reviser/SKILL.md
+mkdir -p ~/.claude/skills/bd-to-br-migration && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bd-to-br-migration/SKILL.md -o ~/.claude/skills/bd-to-br-migration/SKILL.md
+
+# Infrastructure
+mkdir -p ~/.claude/skills/rch && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/rch/SKILL.md -o ~/.claude/skills/rch/SKILL.md
 ```
 
-**Windows (PowerShell):**
-```powershell
-[Environment]::SetEnvironmentVariable("GEMINI_API_KEY", "your-key-here", "User")
-```
+---
+
+## Troubleshooting
+
+**Skills not showing up?**
+- Verify installation: `ls ~/.claude/skills/`
+- Restart Claude Code
+- Check file permissions
+
+**Gemini Grounded Research not working?**
+- Verify API key: `echo $GEMINI_API_KEY`
+- Get key at: https://aistudio.google.com/apikey
 
 ---
 
 ## Contributing
 
-Found a bug? Have an idea for improvement? These skills are living documents:
-
-1. Edit the skill.md files in `~/.claude/skills/[skill-name]/`
-2. Test your changes
-3. Share improvements with the community
-
----
-
-## Cost Efficiency
-
-Running these skills is cost-effective:
-
-- **Fresh Eyes**: ~$0.01 per review (catches bugs worth hours of debugging)
-- **Bug Hunt**: ~$0.05 per hunt (finds critical issues before production)
-- **Idea Wizard**: ~$0.02 per session (generates ideas that could take hours of meetings)
-- **Plan Review**: ~$0.01 per review (prevents wasted implementation effort)
-- **Peer Review**: ~$0.03 per review (cheaper than senior engineer time)
-- **Gemini Research**: ~$0.001 per query (fast, cited research)
-- **PRD Generator**: ~$0.02 per PRD (saves hours of documentation time)
-- **Ralph Converter**: ~$0.005 per conversion (instant automation)
-
-**ROI Example**: A single SQL injection bug caught by Bug Hunt could prevent a breach costing millions. The tool pays for itself thousands of times over.
+Found a bug? Have an improvement? Edit the skill.md files and submit a PR.
 
 ---
 
@@ -421,41 +304,6 @@ MIT License - see LICENSE file for details.
 
 ---
 
-## Learn More
+## Credits
 
-- **Claude Code Documentation**: https://github.com/anthropics/claude-code
-- **Prompt Engineering Guide**: https://docs.anthropic.com/claude/docs/prompt-engineering
-- **Best Practices**: Check your CLAUDE.md and MEMORY.md files for personalized patterns
-
----
-
-## Troubleshooting
-
-**Skills not showing up?**
-- Verify installation: `ls ~/.claude/skills/`
-- Restart Claude Code
-- Check file permissions: `chmod +x ~/.claude/skills/*/skill.md`
-
-**Gemini Grounded Research not working?**
-- Verify API key: `echo $GEMINI_API_KEY`
-- Check API quota: https://aistudio.google.com/
-- Ensure `curl` and `jq` are installed
-
-**Skills running slowly?**
-- Check your Claude Code model (Sonnet is faster than Opus)
-- Reduce scope (use specific file paths instead of entire codebase)
-- Run in parallel: `/fresh-eyes & /bug-hunt` (if independent)
-
----
-
-## Version History
-
-**v1.0** (Feb 2026)
-- Initial release with 8 core skills
-- Fresh Eyes, Bug Hunt, Idea Wizard, Plan Review, Peer Review, Gemini Research, PRD, Ralph
-- Mac/Linux and Windows installers
-- Comprehensive documentation
-
----
-
-All credit goes to Jeffrey Emanuel (Dicklesworthstone)
+Skills created by Jeffrey Emanuel ([JeffreysPrompts.com](https://jeffreysprompts.com))
