@@ -24,42 +24,55 @@ First read ALL of the AGENTS.md file and README.md file super carefully and unde
 - Works with beads (br) for task management
 - Prevents agents from duplicating work
 
-## NTM Workflow Prompts
+## NTM Workflow Skills
 
-This skill includes reusable prompt files for NTM (Named Tmux Manager) in `ntm-prompts/`:
+Related skills for NTM (Named Tmux Manager) agent swarm workflows:
 
-| File | Purpose | When to Use |
-|------|---------|-------------|
-| `01-start-agent.md` | Initial marching orders | Start of session |
-| `02-git-manager.md` | Dedicated git coordination | Pane 1 only |
-| `03-next-bead.md` | Move to next task | After completing work |
-| `04-review-own-code.md` | Self-review for bugs | After each bead |
-| `05-review-others-code.md` | Cross-agent code review | Periodically |
-| `06-random-explore.md` | Random bug hunting | When idle |
-| `07-commit-all.md` | Commit in logical groups | Git manager or any agent |
-| `08-ui-polish.md` | UI/UX refinement | After features complete |
-| `09-test-coverage.md` | Test coverage audit | Before release |
-| `10-reread-agents.md` | Refresh context | After compaction |
+| Skill | Command | Purpose |
+|-------|---------|---------|
+| ntm-start-agent | `/ntm-start-agent` | Initialize worker agents |
+| ntm-git-manager | `/ntm-git-manager` | Designate git coordinator (sticky role) |
+| ntm-next-bead | `/ntm-next-bead` | Move to next priority task |
+| ntm-review-own | `/ntm-review-own` | Self-review for bugs |
+| ntm-review-others | `/ntm-review-others` | Cross-agent code review |
+| ntm-bug-hunt | `/ntm-bug-hunt` | Random codebase exploration |
+| ntm-commit-all | `/ntm-commit-all` | Commit changes in logical groups |
+| ntm-ui-polish | `/ntm-ui-polish` | UI/UX refinement pass |
+| ntm-test-coverage | `/ntm-test-coverage` | Test coverage audit |
+| ntm-reread-agents | `/ntm-reread-agents` | Refresh context after compaction |
 
-### Quick Start Commands
+### Quick Start Workflow
 
 ```bash
-# Setup (copy ntm-prompts to your project)
-cp -r ~/.claude/skills/agent-swarm-launcher/ntm-prompts docs/agent-prompts
-
-# Start agents
+# Setup - spawn agents with NTM
 ntm add myproject --cc=3
-ntm send myproject --pane=1 --file docs/agent-prompts/02-git-manager.md
-ntm send myproject --cc --file docs/agent-prompts/01-start-agent.md
 
-# Work loop
-ntm send myproject --cc --file docs/agent-prompts/04-review-own-code.md
-ntm send myproject --cc --file docs/agent-prompts/03-next-bead.md
+# Designate git manager (pane 1)
+ntm send myproject --pane=1
+# Then type: /ntm-git-manager
 
-# Periodic
-ntm send myproject --cc --file docs/agent-prompts/05-review-others-code.md
-ntm send myproject --pane=1 --file docs/agent-prompts/07-commit-all.md
+# Start worker agents (all other panes)
+ntm send myproject --cc
+# Then type: /ntm-start-agent
+
+# Work loop - after completing tasks
+ntm send myproject --cc
+# Then type: /ntm-review-own
+# Then type: /ntm-next-bead
+
+# Periodic - commit and cross-review
+ntm send myproject --pane=1
+# Then type: /ntm-commit-all
+
+ntm send myproject --cc
+# Then type: /ntm-review-others
+
+# After context compaction
+ntm send myproject --cc
+# Then type: /ntm-reread-agents
 ```
+
+**Note:** The git manager role is "sticky" - it will ignore worker prompts sent via `--cc`.
 
 ---
 
