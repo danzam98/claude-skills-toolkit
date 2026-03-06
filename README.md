@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 31 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
+A comprehensive collection of 41 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
 All skills created by Jeffrey Emanuel ([JeffreysPrompts.com](https://jeffreysprompts.com))
 
@@ -115,6 +115,23 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **README Reviser** | `/readme-reviser` | Update documentation for recent changes, framing them as how it always was |
 | **Gemini Research** | `/gemini-grounded-research` | Web-backed research using Gemini with Google Search grounding for real-time, citation-backed answers |
 | **BD to BR Migration** | `/bd-to-br-migration` | Migrate docs from bd (beads) to br (beads_rust) |
+
+### NTM Swarm Skills (10 skills)
+
+> **NTM (Named Tmux Manager)** is a multi-agent orchestration pattern where multiple Claude agents work in parallel on a single project, coordinated through a shared task queue (beads), MCP Agent Mail for inter-agent messaging, and designated roles. These skills are purpose-built for NTM swarm workflows.
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **NTM Start Agent** | `/ntm-start-agent` | Initialize a worker agent with full project context and coordination protocols |
+| **NTM Next Bead** | `/ntm-next-bead` | Direct agent to pick up the next highest-priority task from the beads queue |
+| **NTM Git Manager** | `/ntm-git-manager` | Designate an agent as the dedicated git coordinator for the swarm |
+| **NTM Commit All** | `/ntm-commit-all` | Commit all pending changes across the swarm in logical groupings |
+| **NTM Reread Agents** | `/ntm-reread-agents` | Refresh agent context by re-reading AGENTS.md after memory compaction |
+| **NTM Review Own** | `/ntm-review-own` | Agent self-review to catch bugs in recently written code before sharing |
+| **NTM Review Others** | `/ntm-review-others` | Cross-agent code review to catch integration issues between parallel work streams |
+| **NTM Bug Hunt** | `/ntm-bug-hunt` | Random codebase exploration to find and fix lurking bugs |
+| **NTM Test Coverage** | `/ntm-test-coverage` | Audit and expand test coverage with comprehensive logging |
+| **NTM UI Polish** | `/ntm-ui-polish` | UI/UX refinement pass for world-class visual polish |
 
 ### Infrastructure (1 skill)
 
@@ -252,6 +269,16 @@ export GEMINI_API_KEY="your-key-here"
 4. /git-committer           # Commit all changes
 ```
 
+### NTM Swarm Workflow
+```
+1. /ntm-start-agent         # Boot each agent with full context
+2. /ntm-next-bead           # Each agent picks up next task
+3. /ntm-review-own          # Self-review before sharing work
+4. /ntm-review-others       # Cross-review parallel streams
+5. /ntm-git-manager         # One agent coordinates all commits
+6. /ntm-commit-all          # Commit everything in order
+```
+
 ---
 
 ## Individual Installation Commands
@@ -303,6 +330,18 @@ mkdir -p ~/.claude/skills/bd-to-br-migration && curl -fsSL https://raw.githubuse
 
 # Infrastructure
 mkdir -p ~/.claude/skills/rch && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/rch/SKILL.md -o ~/.claude/skills/rch/SKILL.md
+
+# NTM Swarm Skills
+mkdir -p ~/.claude/skills/ntm-start-agent && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-start-agent/SKILL.md -o ~/.claude/skills/ntm-start-agent/SKILL.md
+mkdir -p ~/.claude/skills/ntm-next-bead && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-next-bead/SKILL.md -o ~/.claude/skills/ntm-next-bead/SKILL.md
+mkdir -p ~/.claude/skills/ntm-git-manager && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-git-manager/SKILL.md -o ~/.claude/skills/ntm-git-manager/SKILL.md
+mkdir -p ~/.claude/skills/ntm-commit-all && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-commit-all/SKILL.md -o ~/.claude/skills/ntm-commit-all/SKILL.md
+mkdir -p ~/.claude/skills/ntm-reread-agents && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-reread-agents/SKILL.md -o ~/.claude/skills/ntm-reread-agents/SKILL.md
+mkdir -p ~/.claude/skills/ntm-review-own && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-review-own/SKILL.md -o ~/.claude/skills/ntm-review-own/SKILL.md
+mkdir -p ~/.claude/skills/ntm-review-others && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-review-others/SKILL.md -o ~/.claude/skills/ntm-review-others/SKILL.md
+mkdir -p ~/.claude/skills/ntm-bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-bug-hunt/SKILL.md -o ~/.claude/skills/ntm-bug-hunt/SKILL.md
+mkdir -p ~/.claude/skills/ntm-test-coverage && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-test-coverage/SKILL.md -o ~/.claude/skills/ntm-test-coverage/SKILL.md
+mkdir -p ~/.claude/skills/ntm-ui-polish && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-ui-polish/SKILL.md -o ~/.claude/skills/ntm-ui-polish/SKILL.md
 ```
 
 ---
