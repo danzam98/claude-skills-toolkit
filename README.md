@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 30 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
+A comprehensive collection of 31 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
 All skills created by Jeffrey Emanuel ([JeffreysPrompts.com](https://jeffreysprompts.com))
 
@@ -67,12 +67,13 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **Peer Code Reviewer** | `/peer-code-reviewer` | Cross-agent code review to catch issues from parallel work streams |
 | **Plan Review** | `/plan-review` | Validate implementation plans to catch errors and bad assumptions before coding |
 
-### Ideation & Planning (6 skills)
+### Ideation & Planning (7 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
 | **Idea Wizard** | `/idea-wizard` | Generate and evaluate improvement ideas with data-driven prioritization |
 | **100-to-10 Filter** | `/hundred-to-ten-filter` | Generate 100 ideas, then ruthlessly filter to the 10 most brilliant |
+| **Next Best Move** | `/next-best-move` | Find the single smartest, most radically innovative addition to the project right now |
 | **PRD Generator** | `/prd` | Generate comprehensive Product Requirements Documents for features and projects |
 | **Premortem Planner** | `/premortem-planner` | Imagine failure 6 months out and revise the plan to prevent it |
 | **Project Opinion** | `/project-opinion-elicitor` | Get honest, critical assessment of the project from the agent's perspective |
@@ -89,13 +90,12 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **De-Slopify** | `/de-slopify` | Remove telltale AI writing patterns from documentation and text |
 | **Multi-Model Synthesis** | `/multi-model-synthesis` | Blend competing LLM outputs into a superior hybrid plan |
 
-### Testing & Deployment (3 skills)
+### Testing & Deployment (2 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
 | **E2E Pipeline Validator** | `/e2e-pipeline-validator` | Prove the entire system works with real data, no mocks allowed |
 | **Deployment Verifier** | `/deployment-verifier` | Verify live deployment works with automated browser testing |
-| **Gemini Research** | `/gemini-grounded-research` | Web-backed research using Gemini with Google Search grounding |
 
 ### Automation & Agents (5 skills)
 
@@ -107,12 +107,13 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **Git Committer** | `/git-committer` | Intelligently commit all changed files in logical groupings with detailed messages |
 | **Ralph** | `/ralph` | Convert PRDs to JSON format for the Ralph autonomous agent system |
 
-### Workflow & Documentation (3 skills)
+### Workflow & Documentation (4 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
 | **Deep Project Primer** | `/deep-project-primer` | Essential first step to fully understand a project before any work |
 | **README Reviser** | `/readme-reviser` | Update documentation for recent changes, framing them as how it always was |
+| **Gemini Research** | `/gemini-grounded-research` | Web-backed research using Gemini with Google Search grounding for real-time, citation-backed answers |
 | **BD to BR Migration** | `/bd-to-br-migration` | Migrate docs from bd (beads) to br (beads_rust) |
 
 ### Infrastructure (1 skill)
@@ -172,6 +173,20 @@ Generate and evaluate improvement ideas for your project with data-driven priori
 ```
 /idea-wizard                         # General improvements
 /idea-wizard "checkout flow"         # Specific feature
+```
+
+---
+
+### Next Best Move - The Single Smartest Addition
+Reads your AGENTS.md and project plan, then uses deep extended thinking to identify the one most impactful addition you could make right now.
+
+**What makes it different from Idea Wizard:**
+- Produces exactly one answer, not a ranked list
+- Forces a strategic lens: what unlocks the most, not just what's useful
+- Requires grounding in the actual project state first
+
+```
+/next-best-move
 ```
 
 ---
@@ -255,6 +270,7 @@ mkdir -p ~/.claude/skills/plan-review && curl -fsSL https://raw.githubuserconten
 # Ideation & Planning
 mkdir -p ~/.claude/skills/idea-wizard && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/idea-wizard/SKILL.md -o ~/.claude/skills/idea-wizard/SKILL.md
 mkdir -p ~/.claude/skills/hundred-to-ten-filter && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/hundred-to-ten-filter/SKILL.md -o ~/.claude/skills/hundred-to-ten-filter/SKILL.md
+mkdir -p ~/.claude/skills/next-best-move && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/next-best-move/SKILL.md -o ~/.claude/skills/next-best-move/SKILL.md
 mkdir -p ~/.claude/skills/prd && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/prd/SKILL.md -o ~/.claude/skills/prd/SKILL.md
 mkdir -p ~/.claude/skills/premortem-planner && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/premortem-planner/SKILL.md -o ~/.claude/skills/premortem-planner/SKILL.md
 mkdir -p ~/.claude/skills/project-opinion-elicitor && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/project-opinion-elicitor/SKILL.md -o ~/.claude/skills/project-opinion-elicitor/SKILL.md
@@ -271,7 +287,6 @@ mkdir -p ~/.claude/skills/multi-model-synthesis && curl -fsSL https://raw.github
 # Testing & Deployment
 mkdir -p ~/.claude/skills/e2e-pipeline-validator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/e2e-pipeline-validator/SKILL.md -o ~/.claude/skills/e2e-pipeline-validator/SKILL.md
 mkdir -p ~/.claude/skills/deployment-verifier && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deployment-verifier/SKILL.md -o ~/.claude/skills/deployment-verifier/SKILL.md
-mkdir -p ~/.claude/skills/gemini-grounded-research && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/gemini-grounded-research/SKILL.md -o ~/.claude/skills/gemini-grounded-research/SKILL.md
 
 # Automation & Agents
 mkdir -p ~/.claude/skills/agent-swarm-launcher && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/agent-swarm-launcher/SKILL.md -o ~/.claude/skills/agent-swarm-launcher/SKILL.md
@@ -283,6 +298,7 @@ mkdir -p ~/.claude/skills/ralph && curl -fsSL https://raw.githubusercontent.com/
 # Workflow & Documentation
 mkdir -p ~/.claude/skills/deep-project-primer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deep-project-primer/SKILL.md -o ~/.claude/skills/deep-project-primer/SKILL.md
 mkdir -p ~/.claude/skills/readme-reviser && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/readme-reviser/SKILL.md -o ~/.claude/skills/readme-reviser/SKILL.md
+mkdir -p ~/.claude/skills/gemini-grounded-research && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/gemini-grounded-research/SKILL.md -o ~/.claude/skills/gemini-grounded-research/SKILL.md
 mkdir -p ~/.claude/skills/bd-to-br-migration && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bd-to-br-migration/SKILL.md -o ~/.claude/skills/bd-to-br-migration/SKILL.md
 
 # Infrastructure
