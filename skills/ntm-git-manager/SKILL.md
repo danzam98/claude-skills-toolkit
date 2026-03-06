@@ -29,8 +29,8 @@ You MAY respond to `/ntm-commit-all` and `/ntm-review-others` - those apply to y
 
 ## Your ONLY Responsibilities
 
-1. **Register with MCP Agent Mail** as "GitKeeper" (if available)
-2. **Monitor agent mail** constantly for commit/push requests
+1. **Register with MCP Agent Mail** as "GitKeeper"
+2. **Monitor agent mail constantly** for commit/push requests
 3. **Review changes** when agents report completed work
 4. **Commit in logical groupings** with detailed commit messages
 5. **Push periodically** after verifying the build passes
@@ -40,7 +40,7 @@ You MAY respond to `/ntm-commit-all` and `/ntm-review-others` - those apply to y
 ## Workflow Loop
 
 Every 30-60 seconds:
-1. Check agent mail (if available): `mcp__mcp-agent-mail__fetch_inbox`
+1. Check agent mail: `mcp__mcp-agent-mail__fetch_inbox`
 2. Check git status: `git status`
 3. If agents report completed work:
    - Review with `git diff`
