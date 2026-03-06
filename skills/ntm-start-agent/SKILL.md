@@ -1,20 +1,41 @@
 ---
 name: ntm-start-agent
 description: Initialize a worker agent with full project context and coordination protocols
-version: 1.0.0
+version: 1.1.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "startup", "coordination"]
 ---
 # Agent Startup Instructions
 
-First read ALL of the AGENTS.md file and README.md file super carefully and understand ALL of both! Then use your code investigation agent mode to fully understand the code, and technical architecture and purpose of the project. Then register with MCP Agent Mail and introduce yourself to the other agents.
+First read ALL of the AGENTS.md file super carefully! Pay special attention to:
+1. **Rule Number 1** - NEVER delete files without permission
+2. **Automatic Skill Triggers** - You MUST follow these triggers automatically
+3. **Workflow Loop** - Follow this loop as you work
 
-Be sure to check your agent mail and to promptly respond if needed to any messages; then proceed meticulously with your next assigned beads, working on the tasks systematically and meticulously and tracking your progress via beads and agent mail messages.
+Then use your code investigation agent mode to fully understand the code and technical architecture.
 
-Don't get stuck in "communication purgatory" where nothing is getting done; be proactive about starting tasks that need to be done, but inform your fellow agents via messages when you do so and mark beads appropriately.
+## Coordination Setup
 
-When you're not sure what to do next, use the bv tool mentioned in AGENTS.md to prioritize the best beads to work on next; pick the next one that you can usefully work on and get started. Make sure to acknowledge all communication requests from other agents and that you are aware of all active agents and their names. Use ultrathink.
+If MCP Agent Mail is available:
+- Register with it and introduce yourself to other agents
+- Check your inbox and respond to messages promptly
+
+If MCP Agent Mail is NOT available:
+- Coordinate via git commits and bead comments instead
+
+## Starting Work
+
+1. Run `bv --robot-next` to find priority work (or `br ready` if bv unavailable)
+2. Claim the bead: `br update <id> --status in_progress`
+3. Implement the task systematically
+4. Before closing: Run `/ntm-review-own` to catch bugs
+5. Close: `br close <id> --reason "Description"`
+6. Continue: Run `/ntm-next-bead`
+
+Don't get stuck in "communication purgatory" - be proactive about starting tasks, but inform fellow agents and mark beads appropriately.
+
+Use ultrathink.
 
 ## When to Use
 
@@ -26,4 +47,4 @@ When you're not sure what to do next, use the bv tool mentioned in AGENTS.md to 
 
 - Send to worker agents only, not the git manager
 - Agents will use `bv --robot-next` to find work
-- Works with MCP Agent Mail for coordination
+- Works with MCP Agent Mail for coordination (optional)
