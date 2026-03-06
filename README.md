@@ -2,7 +2,7 @@
 
 A comprehensive collection of 41 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
-All skills created by Jeffrey Emanuel ([JeffreysPrompts.com](https://jeffreysprompts.com))
+All skills created or inspired by Jeffrey Emanuel. 
 
 ## Quick Install
 
