@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 41 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
+A comprehensive collection of 42 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
 All skills created or inspired by Jeffrey Emanuel. 
 
@@ -107,7 +107,7 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **Git Committer** | `/git-committer` | Intelligently commit all changed files in logical groupings with detailed messages |
 | **Ralph** | `/ralph` | Convert PRDs to JSON format for the Ralph autonomous agent system |
 
-### Workflow & Documentation (4 skills)
+### Workflow & Documentation (5 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
@@ -115,6 +115,7 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **README Reviser** | `/readme-reviser` | Update documentation for recent changes, framing them as how it always was |
 | **Gemini Research** | `/gemini-grounded-research` | Web-backed research using Gemini with Google Search grounding for real-time, citation-backed answers |
 | **BD to BR Migration** | `/bd-to-br-migration` | Migrate docs from bd (beads) to br (beads_rust) |
+| **Cost Estimate** | `/cost-estimate` | Estimate development cost of a codebase with LOC analysis, market rates, org overhead, team multipliers, and Claude ROI |
 
 ### NTM Swarm Skills (10 skills)
 
@@ -237,6 +238,28 @@ export GEMINI_API_KEY="your-key-here"
 /gemini-grounded-research "What are the latest React 19 features?"
 ```
 
+### Cost Estimate - Development Cost Analysis
+Analyze any codebase and produce a professional development cost estimate suitable for stakeholders, investors, or clients.
+
+**What it calculates:**
+- Lines of code by language/complexity category (Swift, C++, Metal, tests, etc.)
+- Base development hours using industry productivity benchmarks
+- Overhead multipliers (architecture, debugging, code review, docs, testing)
+- Realistic calendar time across company types (solo to enterprise)
+- Market-rate research via live WebSearch for current 2025 rates
+- Full team cost with supporting roles (PM, design, QA, DevOps, etc.)
+- Claude ROI analysis: value per Claude active hour vs. human developer cost
+
+**Output includes:**
+- Low/average/high scenario cost tables
+- Calendar time with organizational overhead (standups, meetings, context-switching)
+- Role breakdown for Growth Company and Enterprise scenarios
+- Speed multiplier and net savings vs. hiring a human developer
+
+```
+/cost-estimate
+```
+
 ---
 
 ## Workflow Examples
@@ -327,6 +350,7 @@ mkdir -p ~/.claude/skills/deep-project-primer && curl -fsSL https://raw.githubus
 mkdir -p ~/.claude/skills/readme-reviser && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/readme-reviser/SKILL.md -o ~/.claude/skills/readme-reviser/SKILL.md
 mkdir -p ~/.claude/skills/gemini-grounded-research && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/gemini-grounded-research/SKILL.md -o ~/.claude/skills/gemini-grounded-research/SKILL.md
 mkdir -p ~/.claude/skills/bd-to-br-migration && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bd-to-br-migration/SKILL.md -o ~/.claude/skills/bd-to-br-migration/SKILL.md
+mkdir -p ~/.claude/skills/cost-estimate && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/cost-estimate/SKILL.md -o ~/.claude/skills/cost-estimate/SKILL.md
 
 # Infrastructure
 mkdir -p ~/.claude/skills/rch && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/rch/SKILL.md -o ~/.claude/skills/rch/SKILL.md
