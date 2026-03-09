@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 43 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
+A comprehensive collection of 44 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
 All skills created or inspired by Jeffrey Emanuel. 
 
@@ -117,7 +117,7 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **BD to BR Migration** | `/bd-to-br-migration` | Migrate docs from bd (beads) to br (beads_rust) |
 | **Cost Estimate** | `/cost-estimate` | Estimate development cost of a codebase with LOC analysis, market rates, org overhead, team multipliers, and Claude ROI |
 
-### NTM Swarm Skills (11 skills)
+### NTM Swarm Skills (12 skills)
 
 > **NTM (Named Tmux Manager)** is a multi-agent orchestration pattern where multiple Claude agents work in parallel on a single project, coordinated through a shared task queue (beads), MCP Agent Mail for inter-agent messaging, and designated roles. These skills are purpose-built for NTM swarm workflows.
 
@@ -134,6 +134,7 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **NTM Bug Hunt** | `/ntm-bug-hunt` | Random codebase exploration to find and fix lurking bugs |
 | **NTM Test Coverage** | `/ntm-test-coverage` | Audit and expand test coverage with comprehensive logging |
 | **NTM UI Polish** | `/ntm-ui-polish` | UI/UX refinement pass for world-class visual polish |
+| **NTM Unstall** | `/ntm-unstall` | Find beads stuck in-progress by dead agents, reset them to open, then pick up highest-impact work |
 
 ### Infrastructure (1 skill)
 
@@ -369,6 +370,7 @@ mkdir -p ~/.claude/skills/ntm-review-others && curl -fsSL https://raw.githubuser
 mkdir -p ~/.claude/skills/ntm-bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-bug-hunt/SKILL.md -o ~/.claude/skills/ntm-bug-hunt/SKILL.md
 mkdir -p ~/.claude/skills/ntm-test-coverage && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-test-coverage/SKILL.md -o ~/.claude/skills/ntm-test-coverage/SKILL.md
 mkdir -p ~/.claude/skills/ntm-ui-polish && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-ui-polish/SKILL.md -o ~/.claude/skills/ntm-ui-polish/SKILL.md
+mkdir -p ~/.claude/skills/ntm-unstall && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-unstall/SKILL.md -o ~/.claude/skills/ntm-unstall/SKILL.md
 ```
 
 ---
