@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 42 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
+A comprehensive collection of 43 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
 
 All skills created or inspired by Jeffrey Emanuel. 
 
@@ -117,12 +117,13 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 | **BD to BR Migration** | `/bd-to-br-migration` | Migrate docs from bd (beads) to br (beads_rust) |
 | **Cost Estimate** | `/cost-estimate` | Estimate development cost of a codebase with LOC analysis, market rates, org overhead, team multipliers, and Claude ROI |
 
-### NTM Swarm Skills (10 skills)
+### NTM Swarm Skills (11 skills)
 
 > **NTM (Named Tmux Manager)** is a multi-agent orchestration pattern where multiple Claude agents work in parallel on a single project, coordinated through a shared task queue (beads), MCP Agent Mail for inter-agent messaging, and designated roles. These skills are purpose-built for NTM swarm workflows.
 
 | Skill | Command | Description |
 |-------|---------|-------------|
+| **NTM Project Prep** | `/ntm-project-prep` | Deep project orientation — read AGENTS.md and README.md thoroughly, then investigate the full codebase architecture before doing any work |
 | **NTM Start Agent** | `/ntm-start-agent` | Initialize a worker agent with full project context and coordination protocols |
 | **NTM Next Bead** | `/ntm-next-bead` | Direct agent to pick up the next highest-priority task from the beads queue |
 | **NTM Git Manager** | `/ntm-git-manager` | Designate an agent as the dedicated git coordinator for the swarm |
@@ -294,12 +295,13 @@ Analyze any codebase and produce a professional development cost estimate suitab
 
 ### NTM Swarm Workflow
 ```
-1. /ntm-start-agent         # Boot each agent with full context
-2. /ntm-next-bead           # Each agent picks up next task
-3. /ntm-review-own          # Self-review before sharing work
-4. /ntm-review-others       # Cross-review parallel streams
-5. /ntm-git-manager         # One agent coordinates all commits
-6. /ntm-commit-all          # Commit everything in order
+1. /ntm-project-prep        # Deep orientation: AGENTS.md, README, full codebase
+2. /ntm-start-agent         # Boot each agent with coordination protocols
+3. /ntm-next-bead           # Each agent picks up next task
+4. /ntm-review-own          # Self-review before sharing work
+5. /ntm-review-others       # Cross-review parallel streams
+6. /ntm-git-manager         # One agent coordinates all commits
+7. /ntm-commit-all          # Commit everything in order
 ```
 
 ---
@@ -356,6 +358,7 @@ mkdir -p ~/.claude/skills/cost-estimate && curl -fsSL https://raw.githubusercont
 mkdir -p ~/.claude/skills/rch && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/rch/SKILL.md -o ~/.claude/skills/rch/SKILL.md
 
 # NTM Swarm Skills
+mkdir -p ~/.claude/skills/ntm-project-prep && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-project-prep/SKILL.md -o ~/.claude/skills/ntm-project-prep/SKILL.md
 mkdir -p ~/.claude/skills/ntm-start-agent && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-start-agent/SKILL.md -o ~/.claude/skills/ntm-start-agent/SKILL.md
 mkdir -p ~/.claude/skills/ntm-next-bead && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-next-bead/SKILL.md -o ~/.claude/skills/ntm-next-bead/SKILL.md
 mkdir -p ~/.claude/skills/ntm-git-manager && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-git-manager/SKILL.md -o ~/.claude/skills/ntm-git-manager/SKILL.md
