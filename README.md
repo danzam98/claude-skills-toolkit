@@ -54,6 +54,90 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 
 ---
 
+## Prerequisites
+
+### For all skills
+- [Claude Code](https://claude.ai/code) installed and configured
+
+### For NTM Swarm skills (`ntm-*`)
+
+NTM swarm skills require additional tooling for full functionality. All tools fall back gracefully when absent, but the full workflow needs:
+
+| Tool | Purpose | Install |
+|------|---------|---------|
+| **br** (beads_rust) | Issue tracking via `.beads/` files | [github.com/Dicklesworthstone/beads_rust](https://github.com/Dicklesworthstone/beads_rust) |
+| **bv** (beads_viewer) | Graph-aware task triage and prioritization | [github.com/Dicklesworthstone/beads_viewer](https://github.com/Dicklesworthstone/beads_viewer) |
+| **MCP Agent Mail** | Inter-agent messaging for swarm coordination | Configure as an MCP server in Claude Code settings |
+| **tmux** | Terminal multiplexer for running multiple agents | `brew install tmux` / `apt install tmux` |
+
+> NTM swarm skills work fine for single-agent workflows without tmux — just invoke them directly in Claude Code. tmux is only needed for multi-agent parallel sessions.
+
+---
+
+## Setting Up a New Project
+
+Use this toolkit as the foundation for any new project:
+
+### 1. Install the skills
+
+```bash
+git clone https://github.com/danzam98/claude-skills-toolkit.git
+cd claude-skills-toolkit
+./install.sh --all --force
+```
+
+### 2. Create your AGENTS.md
+
+Copy the template and customize it for your project:
+
+```bash
+cp claude-skills-toolkit/templates/AGENTS.md your-project/AGENTS.md
+```
+
+Open `AGENTS.md` and fill in every `[TODO: ...]` section:
+- Project overview and purpose
+- Directory structure
+- Tech stack and package manager
+- Static analysis check commands
+- Design system / brand colors (if UI project)
+- Domain-specific patterns
+- Route or module structure
+- Quick Reference commands
+
+The universal rules (Rule #1, irreversible git actions, beads workflow) are already complete — do not change them.
+
+### 3. Initialize beads
+
+```bash
+cd your-project
+br init
+```
+
+This creates the `.beads/` directory. Commit it alongside all future code changes.
+
+### 4. Create the `./robot` agent CLI
+
+In Claude Code, run:
+```
+/robot-mode-maker
+```
+
+This generates a project-level `./robot` CLI tailored to your project. All NTM skills use this as their primary interface.
+
+### 5. Start working
+
+**Single agent:**
+```
+/ntm-project-prep
+```
+
+**Multi-agent swarm (requires tmux + NTM):**
+```
+/agent-swarm-launcher
+```
+
+---
+
 ## Skills Reference
 
 ### Code Quality & Review (6 skills)
@@ -390,6 +474,18 @@ mkdir -p ~/.claude/skills/ntm-test-coverage && curl -fsSL https://raw.githubuser
 mkdir -p ~/.claude/skills/ntm-ui-polish && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-ui-polish/SKILL.md -o ~/.claude/skills/ntm-ui-polish/SKILL.md
 mkdir -p ~/.claude/skills/ntm-unstall && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-unstall/SKILL.md -o ~/.claude/skills/ntm-unstall/SKILL.md
 ```
+
+---
+
+## Templates
+
+The `templates/` directory contains starter files for new projects:
+
+| File | Purpose |
+|------|---------|
+| `templates/AGENTS.md` | Complete AGENTS.md template with all universal rules pre-filled and `[TODO]` placeholders for project-specific sections |
+
+Copy and customize these files when bootstrapping a new project. See [Setting Up a New Project](#setting-up-a-new-project) for the full workflow.
 
 ---
 

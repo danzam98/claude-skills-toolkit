@@ -1,61 +1,60 @@
 ---
 name: ntm-ui-polish
 description: UI/UX refinement pass for world-class visual polish
-version: 1.0.0
+version: 2.0.0
 author: Daniel Fischer
 category: design
 tags: ["ntm", "multi-agent", "swarm", "ui", "ux", "polish"]
 ---
 # UI/UX Polish Pass
 
-I still think there are strong opportunities to enhance the UI/UX look and feel and to make everything work better and be more intuitive, user-friendly, visually appealing, polished, slick, and world class in terms of following UI/UX best practices like those used by Stripe, don't you agree?
+Enhance the UI/UX look and feel to make everything more intuitive, user-friendly, visually appealing, polished, and world-class — following the best practices of top-tier products like Stripe, Linear, and Vercel.
 
-And I want you to carefully consider desktop UI/UX and mobile UI/UX separately while doing this and hyper-optimize for both separately to play to the specifics of each modality.
+Consider desktop and mobile separately. Hyper-optimize for both modalities. Use ultrathink.
 
-I'm looking for true world-class visual appeal, polish, slickness, etc. that makes people gasp at how stunning and perfect it is in every way. Use ultrathink.
+**Before starting:** Read AGENTS.md to understand the design system for this project — color palette, typography, spacing tokens, and any brand guidelines. Apply those values throughout; do not invent new ones.
 
 ## Areas to Focus
 
 ### Visual Polish
-- Consistent spacing and alignment
-- Smooth transitions and animations (respecting prefers-reduced-motion)
-- Proper color contrast (WCAG AA minimum)
-- Typography hierarchy and rhythm
-- Subtle shadows and depth
-- Gradient accents where appropriate
+- Consistent spacing and alignment across all elements
+- Smooth transitions and animations (always respect `prefers-reduced-motion`)
+- Proper color contrast (WCAG AA minimum; AA for body text, AA for UI elements)
+- Typography hierarchy and vertical rhythm
+- Subtle shadows and depth cues
+- Appropriate use of brand colors and accent tones per AGENTS.md
 
 ### Desktop Optimizations
 - Hover states on all interactive elements
-- Keyboard navigation and shortcuts
-- Wide viewport layouts that use space well
-- Multi-column layouts where appropriate
-- Command palette (Cmd+K) integration
+- Keyboard navigation completeness and visible focus rings
+- Wide viewport layouts that use space efficiently
+- Multi-column layouts where content warrants it
+- Command palette or keyboard shortcut integration where appropriate
 
 ### Mobile Optimizations
-- Touch targets minimum 44x44px
-- Thumb-friendly bottom navigation
+- Touch targets minimum 44×44px
+- Thumb-friendly placement of primary actions
 - Swipe gestures where intuitive
-- No hover-dependent functionality
-- Fast tap response (no 300ms delay)
-- Appropriate viewport scaling
+- No functionality that requires hover
+- Fast tap response (eliminate 300ms delay)
+- Appropriate viewport scaling and safe area insets
 
 ### Micro-interactions
-- Button press feedback
-- Loading states
-- Success/error animations
-- Scroll-triggered reveals
+- Button and control press feedback
+- Loading and skeleton states
+- Success/error confirmation animations
+- Scroll-triggered reveals (with reduced-motion fallback)
 - Focus ring transitions
-
-Reference the design system in globals.css for tokens.
 
 ## When to Use
 
 - After core features are implemented
-- For final polish before release
-- When UI feels "good enough" but not great
+- For final polish before stakeholder review or release
+- When the UI is functional but not yet delightful
 
 ## Tips
 
-- Focus on one area at a time
-- Test on both desktop and mobile
-- Respect accessibility requirements
+- Work one area at a time — polish breadth-first before depth
+- Test on both desktop and mobile viewports before closing
+- Never override AGENTS.md brand colors with invented ones
+- Respect accessibility requirements — polish should never reduce usability
