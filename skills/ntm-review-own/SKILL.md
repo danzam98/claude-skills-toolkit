@@ -1,45 +1,50 @@
 ---
 name: ntm-review-own
 description: Agent self-review to catch bugs in recently written code
-version: 1.0.0
+version: 2.0.0
 author: Daniel Fischer
 category: debugging
 tags: ["ntm", "multi-agent", "swarm", "review", "debugging"]
 ---
 # Review Your Own Code
 
-Great, now I want you to carefully read over all of the new code you just wrote and other existing code you just modified with "fresh eyes" looking super carefully for any obvious bugs, errors, problems, issues, confusion, etc.
+Read over all of the new code you just wrote and all existing code you just modified with fresh eyes. Look carefully for any obvious bugs, errors, problems, issues, or confusion. Fix anything you uncover. Use ultrathink.
 
-Carefully fix anything you uncover. Use ultrathink.
+## What to Check
 
-Check for:
-- Logic errors
-- Off-by-one mistakes
-- Null/undefined handling
-- Error handling gaps
-- Type mismatches
+- Logic errors and off-by-one mistakes
+- Null/undefined/empty handling
+- Error handling gaps — what happens on failure?
+- Type mismatches or incorrect assumptions about data shape
 - Missing edge cases
-- Security vulnerabilities (XSS, injection, etc.)
-- Performance issues
-- Accessibility problems
-- Compliance with AGENTS.md rules
+- Security vulnerabilities (XSS, injection, exposed values, etc.)
+- Performance issues (blocking operations, unnecessary work, N+1 patterns)
+- Accessibility problems (missing labels, keyboard traps, color contrast)
+- Compliance with all rules in AGENTS.md
+- Conformance to best practice guides referenced in AGENTS.md
 
-After fixing issues, run:
+## After Fixing Issues
+
+Run the check commands from AGENTS.md's Quick Reference section. These vary by project and phase — use the exact commands specified there, not any assumed default:
+
 ```bash
-bun run typecheck
-bun run lint
+# Use whatever AGENTS.md specifies, for example:
+# ./robot build       (if ./robot is available)
+# npm run build       (mockup phase)
+# bun run typecheck   (production phase)
+# bun run lint        (production phase)
 ```
 
 Fix any errors that appear. Repeat until clean.
 
 ## When to Use
 
-- After an agent completes a bead
-- Before moving to the next task
-- As a quality gate in the workflow
+- After completing a bead — this is a required quality gate before closing
+- Before handing off work to the git manager
+- Whenever you feel uncertain about something you just wrote
 
 ## Tips
 
-- Should be run after each bead completion
-- Catches issues before cross-agent review
-- Ensures code meets project standards
+- Read the code as if someone else wrote it — suspend authorial familiarity
+- Pay extra attention to the first and last lines of functions — edge cases cluster there
+- If a check command doesn't exist yet (e.g., scaffold not built), note it and move on

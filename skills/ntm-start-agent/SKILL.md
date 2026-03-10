@@ -1,54 +1,59 @@
 ---
 name: ntm-start-agent
 description: Initialize a worker agent with full project context and coordination protocols
-version: 1.2.0
+version: 2.0.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "startup", "coordination"]
 ---
 # Agent Startup Instructions
 
-First read ALL of the AGENTS.md file super carefully! Pay special attention to:
-1. **Rule Number 1** - NEVER delete files without permission
-2. **Automatic Skill Triggers** - You MUST follow these triggers automatically
-3. **Workflow Loop** - Follow this loop as you work
+Read ALL of AGENTS.md super carefully before doing anything else. Pay special attention to:
 
-Then use your code investigation agent mode to fully understand the code and technical architecture.
+1. **Rule Number 1** — NEVER delete files without explicit permission
+2. **Automatic Skill Triggers** — You MUST follow these triggers automatically
+3. **Git Workflow** — Do NOT push yourself; notify the git manager after committing
+4. **Tech Stack & Check Commands** — Note the exact commands for this project; do not assume
+
+Then use your code investigation agent mode to understand the codebase architecture.
 
 ## Required Setup
 
-1. **Register with MCP Agent Mail** - Introduce yourself to other agents
-2. **Check your inbox** and respond to messages promptly
+1. **Check for `./robot`** — if it doesn't exist, run `/robot-mode-maker` first
+2. **Get project health snapshot**: `./robot status --json` (or `bv --robot-triage` fallback)
+3. **Register with MCP Agent Mail** — introduce yourself to other agents
+4. **Check your inbox** and respond to any pending messages
 
 ## Starting Work
 
-1. Run `bv --robot-next` to find priority work
-2. Claim the bead: `br update <id> --status in_progress`
-3. Notify other agents via MCP Agent Mail what you're working on
-4. Implement the task systematically
-5. Before closing: Run `/ntm-review-own` to catch bugs
-6. Close: `br close <id> --reason "Description"`
-7. Continue: Run `/ntm-next-bead`
+1. Find priority work: `./robot next --json` (or `bv --robot-next`)
+2. Claim the bead: `./robot claim <id>` (or `br update <id> --status in_progress`)
+3. Notify agents via MCP Agent Mail what you're working on
+4. Implement the task systematically — comply with AGENTS.md and best practice guides
+5. Before closing: run `/ntm-review-own` to catch bugs with fresh eyes
+6. Close and sync: `./robot done <id>` (or `br close <id>` + `br sync --flush-only`)
+7. Commit code and `.beads/` together; notify the git manager — do NOT push yourself
+8. Loop: run `/ntm-next-bead`
 
-Don't get stuck in "communication purgatory" - be proactive about starting tasks, but inform fellow agents and mark beads appropriately.
+Don't get stuck in "communication purgatory" — be proactive about starting tasks, but always mark beads and inform fellow agents.
 
 Use ultrathink.
 
 ## Required Tools
 
-This workflow requires:
-- **MCP Agent Mail** - For inter-agent coordination
-- **bv** (beads_viewer) - For priority-based task selection
-- **br** (beads_rust) - For issue/task tracking
+- **MCP Agent Mail** — inter-agent coordination
+- **`./robot`** — standardized project operations (status, next, claim, done, build, files)
+- **`bv`** (beads_viewer) — priority-based task selection (fallback if `./robot` unavailable)
+- **`br`** (beads_rust) — issue and task tracking
 
 ## When to Use
 
-- At the start of a new agent session
+- At the start of a new worker agent session
 - When spawning worker agents in an NTM swarm
 - To get agents oriented and productive quickly
 
 ## Tips
 
-- Send to worker agents only, not the git manager
-- Agents will use `bv --robot-next` to find work
+- Send to worker agents only — not the git manager (use `/ntm-git-manager` for that)
+- Always claim beads before starting to prevent duplicate work
 - All coordination happens through MCP Agent Mail

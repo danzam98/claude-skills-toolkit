@@ -120,21 +120,23 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 ### NTM Swarm Skills (12 skills)
 
 > **NTM (Named Tmux Manager)** is a multi-agent orchestration pattern where multiple Claude agents work in parallel on a single project, coordinated through a shared task queue (beads), MCP Agent Mail for inter-agent messaging, and designated roles. These skills are purpose-built for NTM swarm workflows.
+>
+> NTM skills are **framework-agnostic** — they work with any project type (Next.js, Rails, Vite, HTML mockups, CLIs, etc.). Project-specific commands and paths live in `AGENTS.md`; the skills contain only workflow and reasoning logic. All skills use `./robot` as their primary interface when present, with graceful fallbacks to raw `bv`/`br`/`git` commands when not.
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| **NTM Project Prep** | `/ntm-project-prep` | Deep project orientation — read AGENTS.md and README.md thoroughly, then investigate the full codebase architecture before doing any work |
-| **NTM Start Agent** | `/ntm-start-agent` | Initialize a worker agent with full project context and coordination protocols |
-| **NTM Next Bead** | `/ntm-next-bead` | Direct agent to pick up the next highest-priority task from the beads queue |
-| **NTM Git Manager** | `/ntm-git-manager` | Designate an agent as the dedicated git coordinator for the swarm |
-| **NTM Commit All** | `/ntm-commit-all` | Commit all pending changes across the swarm in logical groupings |
+| **NTM Project Prep** | `/ntm-project-prep` | Deep project orientation — checks for `./robot`, reads AGENTS.md and README.md thoroughly, then investigates the codebase architecture based on what AGENTS.md describes |
+| **NTM Start Agent** | `/ntm-start-agent` | Initialize a worker agent with full project context, `./robot` setup, and coordination protocols |
+| **NTM Next Bead** | `/ntm-next-bead` | Direct agent to pick up the next highest-priority task, claim it, implement it, and loop |
+| **NTM Git Manager** | `/ntm-git-manager` | Designate an agent as the sole git coordinator — the only swarm agent that pushes to remote |
+| **NTM Commit All** | `/ntm-commit-all` | Commit all pending changes in logical groupings with beads sync; notifies git manager to push |
 | **NTM Reread Agents** | `/ntm-reread-agents` | Refresh agent context by re-reading AGENTS.md after memory compaction |
-| **NTM Review Own** | `/ntm-review-own` | Agent self-review to catch bugs in recently written code before sharing |
-| **NTM Review Others** | `/ntm-review-others` | Cross-agent code review to catch integration issues between parallel work streams |
-| **NTM Bug Hunt** | `/ntm-bug-hunt` | Random codebase exploration to find and fix lurking bugs |
+| **NTM Review Own** | `/ntm-review-own` | Agent self-review quality gate using project check commands from AGENTS.md |
+| **NTM Review Others** | `/ntm-review-others` | Cross-agent code review using `./robot files` for impact discovery; notifies original agents of fixes |
+| **NTM Bug Hunt** | `/ntm-bug-hunt` | Random codebase exploration using `./robot files` for file discovery, then deep bug investigation |
 | **NTM Test Coverage** | `/ntm-test-coverage` | Audit and expand test coverage with comprehensive logging |
 | **NTM UI Polish** | `/ntm-ui-polish` | UI/UX refinement pass for world-class visual polish |
-| **NTM Unstall** | `/ntm-unstall` | Find beads stuck in-progress by dead agents, reset them to open, then pick up highest-impact work |
+| **NTM Unstall** | `/ntm-unstall` | Check agent mail first, then find beads stuck in-progress by dead agents, reset and pick up highest-impact work |
 
 ### Infrastructure (1 skill)
 
@@ -264,6 +266,21 @@ Analyze any codebase and produce a professional development cost estimate suitab
 
 ---
 
+### NTM Skills — Design Philosophy
+
+NTM skills separate **workflow logic** from **project specifics**:
+
+- **Skills encode:** process steps, reasoning patterns, decision logic, coordination protocols
+- **`AGENTS.md` encodes:** file paths, package manager, check commands, tech stack, design tokens
+
+This means the same skill works identically on a Next.js app, a Vite HTML prototype, a Rails API, or a CLI tool — the skill never assumes a framework. When an agent reads AGENTS.md at startup, it learns everything project-specific; the skills just tell it how to behave.
+
+**`./robot` integration:** NTM skills use a project-level `./robot` CLI as their primary interface for common operations (status checks, bead claim/close, builds, file discovery). Use `/robot-mode-maker` to generate `./robot` for any project. All NTM skills fall back gracefully to raw `bv`/`br`/`git` commands when `./robot` is absent.
+
+**Git discipline:** Worker agents never push to remote. The dedicated git manager (initialized with `/ntm-git-manager`) is the sole agent that runs `git push`. Worker agents commit locally and notify the git manager via MCP Agent Mail.
+
+---
+
 ## Workflow Examples
 
 ### Feature Development
@@ -296,13 +313,14 @@ Analyze any codebase and produce a professional development cost estimate suitab
 
 ### NTM Swarm Workflow
 ```
+0. /robot-mode-maker        # Create ./robot CLI (one-time project setup)
 1. /ntm-project-prep        # Deep orientation: AGENTS.md, README, full codebase
-2. /ntm-start-agent         # Boot each agent with coordination protocols
-3. /ntm-next-bead           # Each agent picks up next task
-4. /ntm-review-own          # Self-review before sharing work
-5. /ntm-review-others       # Cross-review parallel streams
-6. /ntm-git-manager         # One agent coordinates all commits
-7. /ntm-commit-all          # Commit everything in order
+2. /ntm-git-manager         # Dedicate one agent as sole git coordinator
+3. /ntm-start-agent         # Boot each worker agent with coordination protocols
+4. /ntm-next-bead           # Each agent picks up, implements, and loops on tasks
+5. /ntm-review-own          # Self-review quality gate before closing each bead
+6. /ntm-review-others       # Cross-review parallel streams periodically
+7. /ntm-commit-all          # Commit everything in logical order (git manager pushes)
 ```
 
 ---
