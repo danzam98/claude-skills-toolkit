@@ -12,6 +12,8 @@ Enhance the UI/UX look and feel to make everything more intuitive, user-friendly
 
 Consider desktop and mobile separately. Hyper-optimize for both modalities. Use ultrathink.
 
+I'm looking for true world-class visual appeal, polish, slickness, etc. that makes people gasp at how stunning and perfect it is in every way.
+
 **Before starting:** Read AGENTS.md to understand the design system for this project — color palette, typography, spacing tokens, and any brand guidelines. Apply those values throughout; do not invent new ones.
 
 ## Areas to Focus
