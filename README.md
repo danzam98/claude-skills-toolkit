@@ -88,10 +88,15 @@ cd claude-skills-toolkit
 
 ### 2. Create your AGENTS.md
 
-Copy the template and customize it for your project:
+Copy the template from the [toolkit repo](https://github.com/danzam98/toolkit) and customize it for your project:
 
 ```bash
-cp claude-skills-toolkit/templates/AGENTS.md your-project/AGENTS.md
+# Option A: clone toolkit and copy
+git clone https://github.com/danzam98/toolkit.git
+cp toolkit/templates/AGENTS.md your-project/AGENTS.md
+
+# Option B: download directly
+curl -fsSL https://raw.githubusercontent.com/danzam98/toolkit/main/templates/AGENTS.md -o your-project/AGENTS.md
 ```
 
 Open `AGENTS.md` and fill in every `[TODO: ...]` section:
@@ -479,13 +484,15 @@ mkdir -p ~/.claude/skills/ntm-unstall && curl -fsSL https://raw.githubuserconten
 
 ## Templates
 
-The `templates/` directory contains starter files for new projects:
+Project templates live in the companion [**danzam98/toolkit**](https://github.com/danzam98/toolkit) repo, which provides:
 
-| File | Purpose |
-|------|---------|
-| `templates/AGENTS.md` | Complete AGENTS.md template with all universal rules pre-filled and `[TODO]` placeholders for project-specific sections |
+| Resource | Location | Purpose |
+|----------|----------|---------|
+| `AGENTS.md` template | [`toolkit/templates/AGENTS.md`](https://github.com/danzam98/toolkit/blob/main/templates/AGENTS.md) | Universal agent rules template — fill in `[TODO]` sections for your project |
+| `nextjs-static` scaffold | [`toolkit/templates/nextjs-static`](https://github.com/danzam98/toolkit/tree/main/templates/nextjs-static) | Next.js 16 + Tailwind v4 + Cloudflare Pages starter |
+| Best-practices guides | [`toolkit/best-practices/`](https://github.com/danzam98/toolkit/tree/main/best-practices) | Authoritative guides agents reference during implementation |
 
-Copy and customize these files when bootstrapping a new project. See [Setting Up a New Project](#setting-up-a-new-project) for the full workflow.
+See [Setting Up a New Project](#setting-up-a-new-project) for the full workflow.
 
 ---
 
