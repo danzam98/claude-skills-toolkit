@@ -59,7 +59,21 @@ mcp__mcp-agent-mail__macro_start_session
   agent_role: "<ROLE from identity file>"
 ```
 
-If the identity file doesn't exist, you'll need to generate a new identity (omit `agent_name` to auto-generate).
+If the identity file doesn't exist, you'll need to generate a new identity (omit `agent_name` to auto-generate), then **save it for future recovery**:
+
+```bash
+# After macro_start_session returns your new agent name:
+mkdir -p "$HOME/.claude/agent-identities/$PROJECT_HASH"
+cat > "$HOME/.claude/agent-identities/$PROJECT_HASH/$SESSION_UUID.json" << EOF
+{
+  "agent_name": "<YOUR_NEW_AGENT_NAME>",
+  "role": "<YOUR_ROLE>",
+  "project_key": "$(pwd)",
+  "created_at": "$(date -Iseconds)"
+}
+EOF
+echo "Identity saved for future compaction recovery"
+```
 
 ## Post-Recovery Checklist
 
