@@ -6,7 +6,16 @@ All skills created or inspired by Jeffrey Emanuel.
 
 ## Quick Install
 
-### Install All Skills
+### Option A: Download the Zip
+
+A pre-built [`claude-skills-md.zip`](https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip) contains all 44 skill markdown files in a single download:
+
+```bash
+curl -fsSL https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip -o claude-skills-md.zip
+unzip claude-skills-md.zip -d ~/.claude/skills/
+```
+
+### Option B: Clone and Install
 
 **Mac/Linux:**
 ```bash
