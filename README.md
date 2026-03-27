@@ -47,11 +47,11 @@ install.bat
 **Mac/Linux:**
 ```bash
 # One-liner to install a specific skill (replace SKILL_NAME)
-mkdir -p ~/.claude/skills/SKILL_NAME && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/SKILL_NAME/SKILL.md -o ~/.claude/skills/SKILL_NAME/SKILL.md
+mkdir -p ~/.claude/skills/SKILL_NAME && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/SKILL_NAME/SKILL.md -o ~/.claude/skills/SKILL_NAME/SKILL.md
 
 # Examples:
-mkdir -p ~/.claude/skills/fresh-eyes && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md
-mkdir -p ~/.claude/skills/bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bug-hunt/SKILL.md -o ~/.claude/skills/bug-hunt/SKILL.md
+mkdir -p ~/.claude/skills/fresh-eyes && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md
+mkdir -p ~/.claude/skills/bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/bug-hunt/SKILL.md -o ~/.claude/skills/bug-hunt/SKILL.md
 ```
 
 **Or clone and copy specific skills:**
@@ -223,18 +223,18 @@ This generates a project-level `./robot` CLI tailored to your project. All NTM s
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| **NTM Project Prep** | `/ntm-project-prep` | Deep project orientation — checks for `./robot`, reads AGENTS.md and README.md thoroughly, then investigates the codebase architecture based on what AGENTS.md describes |
-| **NTM Start Agent** | `/ntm-start-agent` | Initialize a worker agent with full project context, `./robot` setup, and coordination protocols |
-| **NTM Next Bead** | `/ntm-next-bead` | Direct agent to pick up the next highest-priority task, claim it, implement it, and loop |
-| **NTM Git Manager** | `/ntm-git-manager` | Designate an agent as the sole git coordinator — the only swarm agent that pushes to remote |
+| **NTM Project Prep** | `/ntm-project-prep` | Deep project orientation — reads AGENTS.md, follows its authority chain, and inspects the project surfaces it names before doing any work |
+| **NTM Start Agent** | `/ntm-start-agent` | Start or resume a worker agent, register in the correct project, and keep looping through actionable work with strong communication discipline |
+| **NTM Next Bead** | `/ntm-next-bead` | Re-enter the worker loop by picking, claiming, and starting the next actionable task using the project's task-selection flow |
+| **NTM Git Manager** | `/ntm-git-manager` | Run the dedicated git-coordination loop for a swarm while preserving the same role and identity across compaction and idle periods |
 | **NTM Commit All** | `/ntm-commit-all` | Commit all pending changes in logical groupings with beads sync; notifies git manager to push |
-| **NTM Reread Agents** | `/ntm-reread-agents` | Refresh agent context by re-reading AGENTS.md after memory compaction |
+| **NTM Reread Agents** | `/ntm-reread-agents` | Recover cleanly after compaction by reclaiming the same identity, re-reading project authority surfaces, and reconstructing current work before resuming |
 | **NTM Review Own** | `/ntm-review-own` | Agent self-review quality gate using project check commands from AGENTS.md |
-| **NTM Review Others** | `/ntm-review-others` | Cross-agent code review using `./robot files` for impact discovery; notifies original agents of fixes |
+| **NTM Review Others** | `/ntm-review-others` | Perform cross-agent review to catch integration issues and keep the swarm productive when direct implementation work is temporarily unavailable |
 | **NTM Bug Hunt** | `/ntm-bug-hunt` | Random codebase exploration using `./robot files` for file discovery, then deep bug investigation |
 | **NTM Test Coverage** | `/ntm-test-coverage` | Audit and expand test coverage with comprehensive logging |
 | **NTM UI Polish** | `/ntm-ui-polish` | UI/UX refinement pass for world-class visual polish |
-| **NTM Unstall** | `/ntm-unstall` | Check agent mail first, then find beads stuck in-progress by dead agents, reset and pick up highest-impact work |
+| **NTM Unstall** | `/ntm-unstall` | Recover a stalled swarm queue by identifying abandoned in-progress tasks, reopening them safely, and returning the swarm to productive work |
 
 ### Infrastructure (1 skill)
 
@@ -429,64 +429,64 @@ Copy-paste these commands to install specific skills:
 
 ```bash
 # Code Quality
-mkdir -p ~/.claude/skills/fresh-eyes && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md
-mkdir -p ~/.claude/skills/bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bug-hunt/SKILL.md -o ~/.claude/skills/bug-hunt/SKILL.md
-mkdir -p ~/.claude/skills/bug-hunter && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bug-hunter/SKILL.md -o ~/.claude/skills/bug-hunter/SKILL.md
-mkdir -p ~/.claude/skills/peer-review && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/peer-review/SKILL.md -o ~/.claude/skills/peer-review/SKILL.md
-mkdir -p ~/.claude/skills/peer-code-reviewer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/peer-code-reviewer/SKILL.md -o ~/.claude/skills/peer-code-reviewer/SKILL.md
-mkdir -p ~/.claude/skills/plan-review && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/plan-review/SKILL.md -o ~/.claude/skills/plan-review/SKILL.md
+mkdir -p ~/.claude/skills/fresh-eyes && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md
+mkdir -p ~/.claude/skills/bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/bug-hunt/SKILL.md -o ~/.claude/skills/bug-hunt/SKILL.md
+mkdir -p ~/.claude/skills/bug-hunter && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/bug-hunter/SKILL.md -o ~/.claude/skills/bug-hunter/SKILL.md
+mkdir -p ~/.claude/skills/peer-review && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/peer-review/SKILL.md -o ~/.claude/skills/peer-review/SKILL.md
+mkdir -p ~/.claude/skills/peer-code-reviewer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/peer-code-reviewer/SKILL.md -o ~/.claude/skills/peer-code-reviewer/SKILL.md
+mkdir -p ~/.claude/skills/plan-review && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/plan-review/SKILL.md -o ~/.claude/skills/plan-review/SKILL.md
 
 # Ideation & Planning
-mkdir -p ~/.claude/skills/idea-wizard && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/idea-wizard/SKILL.md -o ~/.claude/skills/idea-wizard/SKILL.md
-mkdir -p ~/.claude/skills/hundred-to-ten-filter && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/hundred-to-ten-filter/SKILL.md -o ~/.claude/skills/hundred-to-ten-filter/SKILL.md
-mkdir -p ~/.claude/skills/next-best-move && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/next-best-move/SKILL.md -o ~/.claude/skills/next-best-move/SKILL.md
-mkdir -p ~/.claude/skills/prd && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/prd/SKILL.md -o ~/.claude/skills/prd/SKILL.md
-mkdir -p ~/.claude/skills/premortem-planner && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/premortem-planner/SKILL.md -o ~/.claude/skills/premortem-planner/SKILL.md
-mkdir -p ~/.claude/skills/project-opinion-elicitor && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/project-opinion-elicitor/SKILL.md -o ~/.claude/skills/project-opinion-elicitor/SKILL.md
-mkdir -p ~/.claude/skills/system-weaknesses && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/system-weaknesses/SKILL.md -o ~/.claude/skills/system-weaknesses/SKILL.md
+mkdir -p ~/.claude/skills/idea-wizard && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/idea-wizard/SKILL.md -o ~/.claude/skills/idea-wizard/SKILL.md
+mkdir -p ~/.claude/skills/hundred-to-ten-filter && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/hundred-to-ten-filter/SKILL.md -o ~/.claude/skills/hundred-to-ten-filter/SKILL.md
+mkdir -p ~/.claude/skills/next-best-move && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/next-best-move/SKILL.md -o ~/.claude/skills/next-best-move/SKILL.md
+mkdir -p ~/.claude/skills/prd && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/prd/SKILL.md -o ~/.claude/skills/prd/SKILL.md
+mkdir -p ~/.claude/skills/premortem-planner && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/premortem-planner/SKILL.md -o ~/.claude/skills/premortem-planner/SKILL.md
+mkdir -p ~/.claude/skills/project-opinion-elicitor && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/project-opinion-elicitor/SKILL.md -o ~/.claude/skills/project-opinion-elicitor/SKILL.md
+mkdir -p ~/.claude/skills/system-weaknesses && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/system-weaknesses/SKILL.md -o ~/.claude/skills/system-weaknesses/SKILL.md
 
 # Refactoring & Optimization
-mkdir -p ~/.claude/skills/code-reorganizer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/code-reorganizer/SKILL.md -o ~/.claude/skills/code-reorganizer/SKILL.md
-mkdir -p ~/.claude/skills/deep-performance-audit && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deep-performance-audit/SKILL.md -o ~/.claude/skills/deep-performance-audit/SKILL.md
-mkdir -p ~/.claude/skills/stripe-level-ui && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/stripe-level-ui/SKILL.md -o ~/.claude/skills/stripe-level-ui/SKILL.md
-mkdir -p ~/.claude/skills/stub-eliminator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/stub-eliminator/SKILL.md -o ~/.claude/skills/stub-eliminator/SKILL.md
-mkdir -p ~/.claude/skills/de-slopify && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/de-slopify/SKILL.md -o ~/.claude/skills/de-slopify/SKILL.md
-mkdir -p ~/.claude/skills/multi-model-synthesis && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/multi-model-synthesis/SKILL.md -o ~/.claude/skills/multi-model-synthesis/SKILL.md
+mkdir -p ~/.claude/skills/code-reorganizer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/code-reorganizer/SKILL.md -o ~/.claude/skills/code-reorganizer/SKILL.md
+mkdir -p ~/.claude/skills/deep-performance-audit && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/deep-performance-audit/SKILL.md -o ~/.claude/skills/deep-performance-audit/SKILL.md
+mkdir -p ~/.claude/skills/stripe-level-ui && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/stripe-level-ui/SKILL.md -o ~/.claude/skills/stripe-level-ui/SKILL.md
+mkdir -p ~/.claude/skills/stub-eliminator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/stub-eliminator/SKILL.md -o ~/.claude/skills/stub-eliminator/SKILL.md
+mkdir -p ~/.claude/skills/de-slopify && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/de-slopify/SKILL.md -o ~/.claude/skills/de-slopify/SKILL.md
+mkdir -p ~/.claude/skills/multi-model-synthesis && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/multi-model-synthesis/SKILL.md -o ~/.claude/skills/multi-model-synthesis/SKILL.md
 
 # Testing & Deployment
-mkdir -p ~/.claude/skills/e2e-pipeline-validator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/e2e-pipeline-validator/SKILL.md -o ~/.claude/skills/e2e-pipeline-validator/SKILL.md
-mkdir -p ~/.claude/skills/deployment-verifier && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deployment-verifier/SKILL.md -o ~/.claude/skills/deployment-verifier/SKILL.md
+mkdir -p ~/.claude/skills/e2e-pipeline-validator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/e2e-pipeline-validator/SKILL.md -o ~/.claude/skills/e2e-pipeline-validator/SKILL.md
+mkdir -p ~/.claude/skills/deployment-verifier && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/deployment-verifier/SKILL.md -o ~/.claude/skills/deployment-verifier/SKILL.md
 
 # Automation & Agents
-mkdir -p ~/.claude/skills/agent-swarm-launcher && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/agent-swarm-launcher/SKILL.md -o ~/.claude/skills/agent-swarm-launcher/SKILL.md
-mkdir -p ~/.claude/skills/robot-mode-maker && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/robot-mode-maker/SKILL.md -o ~/.claude/skills/robot-mode-maker/SKILL.md
-mkdir -p ~/.claude/skills/cli-error-tolerance && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/cli-error-tolerance/SKILL.md -o ~/.claude/skills/cli-error-tolerance/SKILL.md
-mkdir -p ~/.claude/skills/git-committer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/git-committer/SKILL.md -o ~/.claude/skills/git-committer/SKILL.md
-mkdir -p ~/.claude/skills/ralph && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ralph/SKILL.md -o ~/.claude/skills/ralph/SKILL.md
+mkdir -p ~/.claude/skills/agent-swarm-launcher && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/agent-swarm-launcher/SKILL.md -o ~/.claude/skills/agent-swarm-launcher/SKILL.md
+mkdir -p ~/.claude/skills/robot-mode-maker && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/robot-mode-maker/SKILL.md -o ~/.claude/skills/robot-mode-maker/SKILL.md
+mkdir -p ~/.claude/skills/cli-error-tolerance && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/cli-error-tolerance/SKILL.md -o ~/.claude/skills/cli-error-tolerance/SKILL.md
+mkdir -p ~/.claude/skills/git-committer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/git-committer/SKILL.md -o ~/.claude/skills/git-committer/SKILL.md
+mkdir -p ~/.claude/skills/ralph && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ralph/SKILL.md -o ~/.claude/skills/ralph/SKILL.md
 
 # Workflow & Documentation
-mkdir -p ~/.claude/skills/deep-project-primer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/deep-project-primer/SKILL.md -o ~/.claude/skills/deep-project-primer/SKILL.md
-mkdir -p ~/.claude/skills/readme-reviser && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/readme-reviser/SKILL.md -o ~/.claude/skills/readme-reviser/SKILL.md
-mkdir -p ~/.claude/skills/gemini-grounded-research && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/gemini-grounded-research/SKILL.md -o ~/.claude/skills/gemini-grounded-research/SKILL.md
-mkdir -p ~/.claude/skills/bd-to-br-migration && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/bd-to-br-migration/SKILL.md -o ~/.claude/skills/bd-to-br-migration/SKILL.md
-mkdir -p ~/.claude/skills/cost-estimate && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/cost-estimate/SKILL.md -o ~/.claude/skills/cost-estimate/SKILL.md
+mkdir -p ~/.claude/skills/deep-project-primer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/deep-project-primer/SKILL.md -o ~/.claude/skills/deep-project-primer/SKILL.md
+mkdir -p ~/.claude/skills/readme-reviser && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/readme-reviser/SKILL.md -o ~/.claude/skills/readme-reviser/SKILL.md
+mkdir -p ~/.claude/skills/gemini-grounded-research && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/gemini-grounded-research/SKILL.md -o ~/.claude/skills/gemini-grounded-research/SKILL.md
+mkdir -p ~/.claude/skills/bd-to-br-migration && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/bd-to-br-migration/SKILL.md -o ~/.claude/skills/bd-to-br-migration/SKILL.md
+mkdir -p ~/.claude/skills/cost-estimate && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/cost-estimate/SKILL.md -o ~/.claude/skills/cost-estimate/SKILL.md
 
 # Infrastructure
-mkdir -p ~/.claude/skills/rch && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/rch/SKILL.md -o ~/.claude/skills/rch/SKILL.md
+mkdir -p ~/.claude/skills/rch && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/rch/SKILL.md -o ~/.claude/skills/rch/SKILL.md
 
 # NTM Swarm Skills
-mkdir -p ~/.claude/skills/ntm-project-prep && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-project-prep/SKILL.md -o ~/.claude/skills/ntm-project-prep/SKILL.md
-mkdir -p ~/.claude/skills/ntm-start-agent && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-start-agent/SKILL.md -o ~/.claude/skills/ntm-start-agent/SKILL.md
-mkdir -p ~/.claude/skills/ntm-next-bead && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-next-bead/SKILL.md -o ~/.claude/skills/ntm-next-bead/SKILL.md
-mkdir -p ~/.claude/skills/ntm-git-manager && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-git-manager/SKILL.md -o ~/.claude/skills/ntm-git-manager/SKILL.md
-mkdir -p ~/.claude/skills/ntm-commit-all && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-commit-all/SKILL.md -o ~/.claude/skills/ntm-commit-all/SKILL.md
-mkdir -p ~/.claude/skills/ntm-reread-agents && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-reread-agents/SKILL.md -o ~/.claude/skills/ntm-reread-agents/SKILL.md
-mkdir -p ~/.claude/skills/ntm-review-own && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-review-own/SKILL.md -o ~/.claude/skills/ntm-review-own/SKILL.md
-mkdir -p ~/.claude/skills/ntm-review-others && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-review-others/SKILL.md -o ~/.claude/skills/ntm-review-others/SKILL.md
-mkdir -p ~/.claude/skills/ntm-bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-bug-hunt/SKILL.md -o ~/.claude/skills/ntm-bug-hunt/SKILL.md
-mkdir -p ~/.claude/skills/ntm-test-coverage && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-test-coverage/SKILL.md -o ~/.claude/skills/ntm-test-coverage/SKILL.md
-mkdir -p ~/.claude/skills/ntm-ui-polish && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-ui-polish/SKILL.md -o ~/.claude/skills/ntm-ui-polish/SKILL.md
-mkdir -p ~/.claude/skills/ntm-unstall && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/main/skills/ntm-unstall/SKILL.md -o ~/.claude/skills/ntm-unstall/SKILL.md
+mkdir -p ~/.claude/skills/ntm-project-prep && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-project-prep/SKILL.md -o ~/.claude/skills/ntm-project-prep/SKILL.md
+mkdir -p ~/.claude/skills/ntm-start-agent && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-start-agent/SKILL.md -o ~/.claude/skills/ntm-start-agent/SKILL.md
+mkdir -p ~/.claude/skills/ntm-next-bead && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-next-bead/SKILL.md -o ~/.claude/skills/ntm-next-bead/SKILL.md
+mkdir -p ~/.claude/skills/ntm-git-manager && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-git-manager/SKILL.md -o ~/.claude/skills/ntm-git-manager/SKILL.md
+mkdir -p ~/.claude/skills/ntm-commit-all && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-commit-all/SKILL.md -o ~/.claude/skills/ntm-commit-all/SKILL.md
+mkdir -p ~/.claude/skills/ntm-reread-agents && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-reread-agents/SKILL.md -o ~/.claude/skills/ntm-reread-agents/SKILL.md
+mkdir -p ~/.claude/skills/ntm-review-own && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-review-own/SKILL.md -o ~/.claude/skills/ntm-review-own/SKILL.md
+mkdir -p ~/.claude/skills/ntm-review-others && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-review-others/SKILL.md -o ~/.claude/skills/ntm-review-others/SKILL.md
+mkdir -p ~/.claude/skills/ntm-bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-bug-hunt/SKILL.md -o ~/.claude/skills/ntm-bug-hunt/SKILL.md
+mkdir -p ~/.claude/skills/ntm-test-coverage && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-test-coverage/SKILL.md -o ~/.claude/skills/ntm-test-coverage/SKILL.md
+mkdir -p ~/.claude/skills/ntm-ui-polish && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-ui-polish/SKILL.md -o ~/.claude/skills/ntm-ui-polish/SKILL.md
+mkdir -p ~/.claude/skills/ntm-unstall && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ntm-unstall/SKILL.md -o ~/.claude/skills/ntm-unstall/SKILL.md
 ```
 
 ---
