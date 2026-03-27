@@ -1,91 +1,70 @@
 ---
 name: ntm-unstall
-description: Find beads stuck in-progress by dead agents, reset them to open, then pick up the highest-impact work
-version: 2.0.0
+description: Recover a stalled swarm queue by identifying abandoned in-progress tasks, reopening them safely, and returning the swarm to productive work
+version: 2.1.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "beads", "recovery", "stalled"]
 ---
-# Unstall the Queue
+# Recover a Stalled Queue
 
-Find beads stuck `in_progress` with no recent activity (abandoned by dead agents), reset them to `open`, then pick up the highest-impact available work.
+Use this when the queue appears empty or stuck even though work should still be moving.
 
-## Step 1: Check Agent Mail First
+If you are returning from compaction or a long idle period, run `/ntm-reread-agents` first unless you have already reconstructed current state.
 
-**Before resetting anything**, check your inbox to confirm no live agent is actively working the beads you're about to reset. Resetting a bead under an active agent causes conflicts:
+## Step 1: Check Coordination State First
 
-```
-mcp__mcp-agent-mail__fetch_inbox
-```
+Before reopening anything:
+- check inbox
+- inspect recent coordination messages
+- confirm no live agent is still actively working the candidate tasks
 
-If another agent is clearly working on a bead, do not reset it — coordinate with them instead.
+Never reset a live agent's work just because it looks quiet.
 
-## Step 2: Find Stalled Beads
+## Step 2: Find Suspected Stalled Work
 
-```bash
-br list --status in_progress --json
-```
+Use the project's task tracker commands from AGENTS to identify in-progress work that may be abandoned.
 
-A bead is stalled if:
-- It has been `in_progress` for a long time with no corresponding commits or activity in `git log`
-- The agent that claimed it is no longer reachable via agent mail
-- No recent progress notes or updates exist on the bead
+Look for evidence such as:
+- long-lived in-progress state with no recent activity
+- no recent commits or progress notes
+- agent clearly unreachable or inactive
+- blocked downstream work caused by the stale claim
 
-## Step 3: Reset Stalled Beads to Open
+## Step 3: Reopen Only Confirmed Abandoned Work
 
-For each confirmed stalled bead:
-
-```bash
-br update <id> --status open
-br update <id> --reason "Reset from in_progress: no agent activity detected, returning to queue"
-```
+For each confirmed stalled task:
+- reopen or reset it using the project task tracker
+- leave a clear reason in task history
+- avoid silent queue surgery
 
 ## Step 4: Notify the Swarm
 
-Via MCP Agent Mail, send a brief message:
+Send a brief coordination update describing:
+- which tasks were recovered
+- why they were considered abandoned
+- what you are picking up next, if anything
 
-> "Recovered N stalled bead(s): [list IDs]. Back in the open queue. Picking up [highest-priority ID] now."
+## Step 5: Return the Queue to Motion
 
-## Step 5: Find the Highest-Impact Work
+After recovery:
+- re-run the project's triage flow
+- claim the highest-impact actionable task if appropriate
+- reserve files before editing
+- announce start
+- continue the normal worker loop
 
-```bash
-# Preferred:
-./robot triage --json
+If there is still no actionable work after recovery, run `/ntm-review-others` and continue monitoring.
 
-# Fallback:
-bv --robot-next
-bv --robot-plan
-```
-
-Check for cycles or critical path blockages if triage looks unusual:
-
-```bash
-bv --robot-insights
-```
-
-## Step 6: Claim and Begin
-
-```bash
-# Preferred:
-./robot claim <id>
-
-# Fallback:
-br update <id> --status in_progress
-```
-
-Notify fellow agents what you're picking up, then implement.
-
----
+Do not stop to produce a project-wide summary for the user unless explicitly asked or unless no actionable work remains and status is required.
 
 ## When to Use
 
-- When `br ready` returns empty but `br list --status in_progress` shows beads
-- When agents have died mid-task and left the queue blocked
-- As a periodic health check on swarm queue state
-- When overall velocity feels low despite agents being active
+- when the queue appears empty but there is stranded in-progress work
+- when dead agents appear to have blocked the swarm
+- as periodic queue-health recovery during long swarm sessions
 
 ## Tips
 
-- Always check agent mail before resetting — never reset a live agent's work
-- After resetting, use `bv --robot-insights` to check for cycles or critical path blockages
-- This is a good complement to `/ntm-next-bead` when the queue appears empty but isn't
+- Recovery must be conservative: verify abandonment before reopening anything.
+- Always communicate recovery actions so other agents understand the queue change.

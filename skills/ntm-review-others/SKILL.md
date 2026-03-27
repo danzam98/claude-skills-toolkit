@@ -1,77 +1,52 @@
 ---
 name: ntm-review-others
-description: Cross-agent code review to catch integration issues
-version: 2.0.0
+description: Perform cross-agent review to catch integration issues and keep the swarm productive when direct implementation work is temporarily unavailable
+version: 2.1.0
 author: Daniel Fischer
 category: debugging
 tags: ["ntm", "multi-agent", "swarm", "review", "peer-review"]
 ---
-# Cross-Agent Code Review
+# Cross-Agent Review Loop
 
-Review code written by your fellow agents. Check for bugs, errors, inefficiencies, security problems, and reliability issues. Diagnose root causes using first-principles analysis. Fix or revise where necessary.
+Review recent work from other agents to catch integration issues, contract drift, missing tests, or unsafe assumptions.
 
-Don't restrict yourself to the latest commits — cast a wide net and go deep. Use ultrathink.
+Use this when:
+- the queue is temporarily empty
+- multiple agents have been working in parallel and integration risk is rising
+- you need productive swarm work while waiting for new actionable tasks
+
+## Coordination First
+
+Before starting review work:
+- check inbox
+- announce that you are switching into cross-agent review mode
+- if review is likely to become an edit, reserve the files or surfaces you expect to modify before changing them
 
 ## Review Process
 
-### 1. Survey recent agent work
+1. Identify recent work from other agents using the project's history surfaces.
+2. Inspect the diffs and affected code paths.
+3. Check for:
+   - integration breakage across modules or repos
+   - inconsistent patterns introduced by parallel workers
+   - missing validation, tests, or schema alignment
+   - contract drift from project rules or the north-star
+   - unsafe assumptions that could affect other agents
+4. Fix issues directly when appropriate, or communicate findings clearly if a different owner should act.
+5. Run the project quality gates required for the changes you made.
+6. Notify the affected agents and the swarm about what you found and changed.
 
-```bash
-git log --oneline -20
-```
+## After Review
 
-For each commit from other agents:
-- `git show <sha>` to see the full diff
-- Trace the code paths affected
-- Look for integration issues with your own work
-- Check for violations of AGENTS.md rules or project conventions
+When finished:
+- return to the normal worker loop
+- re-check the queue for actionable work
+- if the queue is still blocked or stale, use `/ntm-unstall`
 
-### 2. Go deeper where warranted
-
-Use `./robot files [query]` (or explore the directories described in AGENTS.md) to find related files that might be affected by the changes. Don't limit review to just the diff — understand the full impact radius.
-
-### 3. Common issues to watch for
-
-- Inconsistent patterns across files (different agents solving the same problem differently)
-- Broken or missing imports after refactoring
-- Duplicate code that should be in a shared location
-- Race conditions in async code
-- Missing error boundaries or graceful degradation
-- Memory leaks in effects, subscriptions, or event listeners
-- Security vulnerabilities introduced by new code
-- AGENTS.md rule violations (wrong package manager commands, attempted file deletion, etc.)
-- Hardcoded values that should reference project design tokens or config
-
-### 4. Fix what you find
-
-Fix issues directly. Understand the root cause before patching the symptom. Match existing project conventions — do not introduce new patterns.
-
-### 5. Run full verification
-
-Run the check commands from AGENTS.md's Quick Reference (build, typecheck, lint, test — whatever applies to this project). Fix all errors before committing your review fixes.
-
-```bash
-# Use whatever AGENTS.md specifies, for example:
-# ./robot build       (if ./robot is available)
-# npm run build       (mockup phase)
-# bun run typecheck && bun run lint  (production phase)
-```
-
-### 6. Notify original agents
-
-Via MCP Agent Mail, inform the agent whose code you modified what you found and why you changed it. This keeps the swarm aligned and prevents agents from redoing work in conflicting ways.
-
----
-
-## When to Use
-
-- Periodically during swarm sessions (every few beads)
-- When multiple agents have been working in parallel
-- Before major commits or releases
-- When integration issues are suspected
+Do not stop to give a project-wide summary to the user unless explicitly asked or unless no actionable work remains and status is required.
 
 ## Tips
 
-- Catches issues that self-review misses — especially cross-agent consistency
-- Always notify the original agent; don't silently rewrite their work
-- Commit review fixes via the git manager like any other code change
+- This is productive fallback work, not a reason to go idle.
+- Keep the original author informed when you modify or correct their work.
+- If review turns into code changes, follow the same reservation, inbox, commit, and handoff discipline as any other task.

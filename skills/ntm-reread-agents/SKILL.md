@@ -1,102 +1,62 @@
 ---
 name: ntm-reread-agents
-description: Refresh agent context and recover identity after memory compaction
-version: 3.0.0
+description: Recover cleanly after compaction by reclaiming the same identity, re-reading project authority surfaces, and reconstructing current work before resuming
+version: 2.1.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "context", "refresh"]
 ---
-# Refresh Context
+# Rehydrate After Compaction
 
-Reread AGENTS.md so it's still fresh in your mind. Use ultrathink.
+Use this after memory compaction or after returning from a long idle period when you need to reconstruct context without inventing a new identity.
 
-Pay special attention to:
-- Rule Number 1 (NEVER delete files without permission)
-- Git workflow and commit conventions — do NOT push yourself; notify the git manager
-- Package manager and check commands — note what AGENTS.md specifies, do not assume
-- Code editing discipline
-- Issue tracking with br (beads_rust)
-- Agent communication protocol
-- Any active development phase restrictions
+## Step 1: Reclaim the Same Identity
 
-## Identity Recovery Protocol
+Before doing anything else:
+- reuse your prior identity if this is the same pane/role
+- do not register a fresh identity just because memory was compacted
+- do not register a fresh identity just because the project was quiet
+- if you do not remember your identity, recover it from the project coordination system before acting
+- if you truly cannot recover your original identity, prefer a dormant unclaimed project identity that satisfies the idle-reuse threshold defined by AGENTS and has no active obligations over minting a new one
 
-After context compaction, you need to recover your agent identity. The compaction summary contains your session UUID in the transcript path.
+## Step 2: Re-read the Project Authority Surfaces
 
-### Step 1: Extract Session UUID from Compaction Summary
+Re-read `AGENTS.md` fully.
 
-Look for this line in the compaction summary message:
-> "read the full transcript at: /home/.../.claude/projects/-<project-slug>/<SESSION_UUID>.jsonl"
+Then follow AGENTS' authority order and re-read the authoritative project-specific surfaces it names, such as:
+- the primary architecture or north-star doc
+- aligned plan or migration docs
+- README
+- project CLI docs and status surfaces
+- repo-owned project skill definitions
 
-Extract the UUID (the filename without `.jsonl`).
+Do not assume which files matter; let AGENTS tell you.
 
-### Step 2: Look Up Your Identity
+## Step 3: Reconstruct State
 
-```bash
-# Get project directory
-PROJECT_DIR=$(pwd)
-PROJECT_HASH=$(echo -n "$PROJECT_DIR" | md5sum | cut -c1-12)
+Recover the current state before taking action:
+- check inbox and recent message threads
+- inspect current project status
+- inspect the current queue / task state
+- determine whether you already own an active task or sticky role
+- reconstruct any file reservations or pending handoffs that matter
 
-# Use the SESSION_UUID from the compaction summary
-IDENTITY_FILE="$HOME/.claude/agent-identities/$PROJECT_HASH/<SESSION_UUID>.json"
+## Step 4: Resume Correctly
 
-if [ -f "$IDENTITY_FILE" ]; then
-    cat "$IDENTITY_FILE"
-    AGENT_NAME=$(jq -r '.agent_name' "$IDENTITY_FILE")
-else
-    echo "WARNING: No identity file found. You may need to register as a new agent."
-fi
-```
+If you already own active work, resume it.
+If you are the git manager, return to the git-manager loop.
+If you are a worker with no active task, return to the worker loop or use `/ntm-next-bead`.
+If there is no actionable work, use `/ntm-review-others` or `/ntm-unstall`, then re-check.
 
-### Step 3: Reconnect with MCP Agent Mail
-
-Call `macro_start_session` with your recovered identity:
-
-```
-mcp__mcp-agent-mail__macro_start_session
-  human_key: "<PROJECT_DIR>"
-  agent_name: "<AGENT_NAME from identity file>"
-  agent_role: "<ROLE from identity file>"
-```
-
-If the identity file doesn't exist, you'll need to generate a new identity (omit `agent_name` to auto-generate), then **save it for future recovery**:
-
-```bash
-# After macro_start_session returns your new agent name:
-mkdir -p "$HOME/.claude/agent-identities/$PROJECT_HASH"
-cat > "$HOME/.claude/agent-identities/$PROJECT_HASH/$SESSION_UUID.json" << EOF
-{
-  "agent_name": "<YOUR_NEW_AGENT_NAME>",
-  "role": "<YOUR_ROLE>",
-  "project_key": "$(pwd)",
-  "created_at": "$(date -Iseconds)"
-}
-EOF
-echo "Identity saved for future compaction recovery"
-```
-
-## Post-Recovery Checklist
-
-After recovering your identity:
-
-1. **Check your agent mail inbox** for any messages you may have missed
-2. **Run `./robot status --json`** for current project health (or `bv --robot-next` as fallback)
-3. **Run `br ready`** to see available tasks
-4. **Review your in-progress work** — check if you had any beads claimed before compaction
-
-Then proceed with your current task or pick a new one.
+Do not stop to write a project-wide summary to the user unless explicitly asked or unless no actionable work remains and status is needed.
 
 ## When to Use
 
-- After context compaction (when agent memory is compressed)
-- When agent seems to have forgotten project rules
-- Periodically to reinforce key conventions
-- When the compaction summary mentions a transcript path
+- immediately after compaction
+- after a long idle period when the project may have moved
+- whenever you realize you have lost the current project state
 
 ## Tips
 
-- Critical after long sessions
-- Prevents rule violations from context loss
-- Keeps agents aligned with project standards
-- Identity files are stored in `~/.claude/agent-identities/<project-hash>/`
-- If identity recovery fails, register fresh and notify the swarm of your new name
+- This is the default recovery path after compaction.
+- The goal is to continue work with the same role and identity, not to create a new agent footprint.

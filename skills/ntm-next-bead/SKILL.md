@@ -1,77 +1,82 @@
 ---
 name: ntm-next-bead
-description: Direct agent to pick up the next highest-priority task
-version: 2.0.0
+description: Re-enter the worker loop by picking, claiming, and starting the next actionable task using the project's task-selection flow
+version: 2.1.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "beads", "workflow"]
 ---
-# Continue to Next Bead
+# Continue to Next Task
 
-Reread AGENTS.md so it's still fresh in your mind. Use ultrathink.
+Use this when you are already oriented and need to resume productive task pickup.
 
-Find the most impactful bead to work on next, claim it, and start immediately.
+If you are returning from compaction and have not rehydrated context yet, run `/ntm-reread-agents` first.
 
-## Step 1: Find Next Task
+## Step 1: Check Coordination State
 
-Use `./robot next` if available, otherwise fall back to `bv --robot-next` directly:
+Before selecting work:
+- check inbox
+- confirm whether you already own an active task
+- respond to anything blocking or relevant
 
-```bash
-# Preferred:
-./robot next --json
+If you already own active work, continue it instead of picking something new.
 
-# Fallback:
-bv --robot-next
-```
+## Step 2: Select and Claim the Next Actionable Task
 
-## Step 2: Claim and Announce
+Use the project's task-selection flow from AGENTS.
 
-```bash
-# Preferred:
-./robot claim <id>
+Rules:
+- prefer the project's machine-readable task selector if it exists
+- otherwise use the project task tracker commands AGENTS specifies
+- claim before starting
+- avoid racing other agents by communicating promptly once claimed
 
-# Fallback:
-br update <id> --status in_progress
-```
+## Step 3: Reserve and Announce
 
-Notify fellow agents via MCP Agent Mail what you're starting. Check for any pending messages and respond before diving in.
+Before editing:
+- reserve the required files or work surface
+- announce start to the swarm
+- reference the task id in reservation reasons and message subjects where the project expects that
 
-## Step 3: Implement
+## Step 4: Implement and Communicate
 
-Work systematically and meticulously. Follow AGENTS.md rules at every step. Comply with the best practice guides referenced in AGENTS.md.
+Implement systematically.
 
-## Step 4: Self-Review
+During execution:
+- check inbox at natural checkpoints
+- send brief progress notes when the task meaningfully advances, blocks, or changes direction
+- keep the swarm aware of anything that affects other agents
 
-Before closing, run `/ntm-review-own` to catch issues with fresh eyes.
+## Step 5: Close Cleanly and Continue
 
-## Step 5: Close and Sync
+After finishing:
+- self-review
+- run the project quality gates
+- close or update the task in the project tracker
+- sync task metadata
+- release reservations
+- commit your logical unit and follow the project's git protocol
+- notify the git manager or follow the project's commit handoff rules
+- check inbox again
 
-```bash
-# Preferred (closes bead + flushes .beads/):
-./robot done <id>
+Then continue the worker loop.
 
-# Fallback:
-br close <id> --reason "Description of what was done"
-br sync --flush-only
-git add .beads/
-```
+## Step 6: If Nothing Is Actionable
 
-Then commit your code and `.beads/` changes together, and notify the git manager.
+If there is no actionable work right now:
+- run `/ntm-review-others`, or
+- run `/ntm-unstall` if the queue appears blocked or abandoned
+- then re-check the queue
 
-## Step 6: Loop
-
-Run `/ntm-next-bead` again to pick up the next task.
-
----
+Do not stop just to summarize the project to the user unless explicitly asked or unless no actionable work remains and status is needed.
 
 ## When to Use
 
-- After an agent completes a task
-- When agents are idle and need direction
-- To keep the swarm productive
+- after completing a task
+- when an oriented worker is idle
+- when you want to nudge a worker back into the loop
 
 ## Tips
 
-- Always claim before starting to prevent duplicate work by other agents
-- Communicate via MCP Agent Mail to stay coordinated
-- Do NOT push — notify the git manager after committing
+- This is a re-entry skill, not a full orientation skill.
+- If a direct assignment is present in mail or from the operator, follow that instead of generic triage.

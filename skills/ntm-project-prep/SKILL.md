@@ -1,137 +1,105 @@
 ---
 name: ntm-project-prep
-description: Deep project orientation - read AGENTS.md and README.md thoroughly, then investigate the full codebase architecture before doing any work
-version: 2.0.0
+description: Deep project orientation - read AGENTS.md, then follow its authority chain and inspect the project surfaces it names before doing any work
+version: 2.1.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "startup", "orientation", "context"]
 ---
 # Project Preparation
 
-Before touching a single line of code or claiming any task, complete every step below in full. No shortcuts. Use ultrathink throughout.
+Before touching code, claiming work, or registering a fresh agent identity, orient yourself fully. No shortcuts.
 
----
+## Step 1: Read AGENTS.md in Full
 
-## Step 0: Ensure `./robot` CLI Exists
+Read the entire `AGENTS.md` file.
 
-Check for the project-level agent CLI before anything else:
+Extract these items explicitly:
+- authority order between project documents
+- task-selection commands and task-system rules
+- coordination tools and registration rules
+- file-reservation rules
+- quality gates and check commands
+- git/commit/push rules
+- session-completion expectations
 
-```bash
-ls ./robot 2>/dev/null && echo "exists" || echo "missing"
-```
+If AGENTS says certain docs or tools are authoritative, treat that as the contract of record.
 
-If missing, invoke `/robot-mode-maker` to create it. The `./robot` CLI provides machine-readable status, file discovery, bead operations, and build execution — later steps depend on it.
+## Step 2: Follow the Project Authority Chain
 
----
+Read every project-specific file that `AGENTS.md` says is authoritative.
 
-## Step 1: Read AGENTS.md — Cover to Cover
+Typical examples include:
+- the primary architecture or north-star document
+- the aligned implementation or migration plan
+- the project README
+- machine-readable project CLI docs such as `./robot help --json`, `./robot docs --json`, `./robot plan --json`, or similar
+- repo-owned project skill definitions if AGENTS points to a project skill directory
 
-Read the **entire** `AGENTS.md` file. Do not skim. Internalize every section.
+Do not hardcode assumptions about which files these are. Let AGENTS tell you.
 
-Pay special attention to:
+## Step 3: Reuse Identity If This Is a Return, Not a New Agent
 
-1. **Rule Number 1** — NEVER delete any file without express written permission. This is absolute.
-2. **Irreversible Git & Filesystem Actions** — Forbidden commands, safer alternatives, mandatory explicit plan.
-3. **Tech Stack** — Framework versions, package manager, deployment target. Note exactly what AGENTS.md specifies — do not assume bun, npm, or any particular framework.
-4. **Code Editing Discipline** — No code-mod scripts. No mass regex. Mechanical changes via parallel subagents only.
-5. **File Organization** — No duplicate or versioned files. No `componentV2`, no shims. Revise existing files in place.
-6. **Design System** — Color palette, typography, and any motion or accessibility guidelines specific to this project.
-7. **Static Analysis** — Note the exact check commands in AGENTS.md's Quick Reference. These vary by project and by development phase — do not assume `bun`, `npm`, or specific command names.
-8. **Issue Tracking** — ALL task tracking goes through `br`. Never use markdown TODOs.
-9. **Automatic Skill Triggers** — If a trigger table exists, memorize it. You MUST invoke triggered skills automatically.
-10. **Workflow Loop** — Follow the triage → claim → implement → review → close → next loop exactly.
-11. **Git Workflow** — Commit code AND `.beads/` together. Do NOT run `git push` yourself — notify the git manager.
-12. **Agent Communication** — Register with MCP Agent Mail. Check inbox. Notify peers of what you're working on.
+If this is a compaction recovery or an idle return in the same pane/role, reclaim the same agent identity.
 
----
+Rules:
+- do not create a new identity just because memory was compacted
+- do not create a new identity just because the project was quiet for a while
+- only create a fresh identity for a genuinely new concurrent agent
+- if you do not remember your identity, recover it from the project coordination system before acting
+- if you truly cannot recover your original identity, prefer reusing a dormant unclaimed project identity that satisfies the idle-reuse threshold defined by AGENTS and carries no active obligations rather than minting a brand-new one
 
-## Step 2: Read README.md — Cover to Cover
+Use the project registration rules from AGENTS so you register in the correct project and with the correct identity.
 
-Read the **entire** `README.md`. Understand:
+## Step 4: Inspect the Project Surfaces AGENTS Names
 
-- What the project is and who it's for
-- Product goals and target audience
-- Setup, configuration, or deployment instructions
-- Key features and how they fit together
-- Any conventions, gotchas, or important notes
+Investigate the codebase and tooling based on the project structure described by AGENTS, not on generic framework guesses.
 
----
+Inspect only the relevant surfaces AGENTS points to, such as:
+- top-level repo layout
+- project CLI entrypoints
+- implementation repo entrypoints
+- schema or contract directories
+- build/pipeline modules
+- plugin or domain-pack surfaces
+- test directories and verification commands
+- project-owned skill directories
 
-## Step 3: Get Project Health Snapshot
+Map what exists, what is missing, and what appears to be the current active implementation surface.
 
-```bash
-./robot status --json
-```
+## Step 5: Capture the Live Project State
 
-Note: current git branch, uncommitted files, bead counts (open/actionable/in-progress), and scaffold state. This tells you exactly where the project stands before you explore code.
+Use the project tools AGENTS specifies to inspect current state.
 
----
+At minimum, gather:
+- machine-readable project status
+- task queue / triage state
+- current in-progress work
+- available commands exposed by the project CLI, if one exists
+- any recent coordination messages relevant to your role
 
-## Step 4: Investigate the Codebase
+## Step 6: Confirm Readiness Internally
 
-Use your Explore agent subagent mode. **Base your exploration entirely on what AGENTS.md describes as the project structure** — do not assume Next.js, Rails, HTML, or any particular layout. Read the directories and files that AGENTS.md points to.
+Before starting work, make sure you know:
+- the project purpose and current north-star
+- the rules you must not violate
+- the exact quality gates for this project
+- the coordination, reservation, and task-selection flow
+- whether you are resuming an existing role or starting a new one
 
-### 4a. Project Structure
-- Scan the top-level directory layout
-- Map each major directory to the role AGENTS.md describes for it
-- Note anything unusual, missing, or not yet scaffolded
-
-### 4b. Entry Points
-- Find the main entry points for the project (could be HTML files, app entry files, API routes, index files — whatever this project uses)
-- Understand how the application starts and how pages or routes are organized
-
-### 4c. Design System & Tokens
-- Find the primary styling files (CSS, design token files, theme configs)
-- Understand the color palette, spacing, and any utility or token conventions
-- Note the design values from AGENTS.md Brand Colors section
-
-### 4d. Shared Components / Templates
-- Explore shared layout components, templates, or partials described in AGENTS.md
-- Read navigation, header, footer, and any layout wrappers
-- Understand shared UI primitives or component patterns
-
-### 4e. Data & Business Logic
-- Find seed data, fixtures, content files, or API schemas
-- Read key utility or shared library files
-- Understand data shapes and how they flow through the application
-
-### 4f. Build & Configuration
-- Read build config files referenced in AGENTS.md (package.json, vite.config, next.config, etc.)
-- Understand the dev/build/preview/test commands — these are your check commands
-- Note environment variables or configuration requirements
-
-### 4g. Tests (if present)
-- Check whether a test directory exists
-- Understand what's covered and what tooling is used
-- If no tests exist, note that for later
-
----
-
-## Step 5: Synthesize & Confirm Readiness
-
-Internally summarize before picking up any work:
-
-- The project's purpose and key technical decisions
-- Rules you must never violate: Rule #1 (no deletion), correct package manager, `br` for tracking, no self-push
-- The exact check commands for this project (from AGENTS.md Quick Reference)
-- Whether `./robot` exists and what commands it exposes (`./robot help --json`)
-- Current bead state: `./robot triage --json` (or `bv --robot-triage` as fallback)
-
-Only then are you ready to claim a task and begin work.
-
----
+Only then should you proceed to worker startup, git-manager startup, or task pickup.
 
 ## When to Use
 
-- At the very start of a fresh agent session
-- When onboarding a new agent to the swarm for the first time
-- Whenever an agent feels uncertain about project conventions or architecture
-- After a long break or major architectural change
+- at the start of a fresh agent session
+- when onboarding a new agent to a swarm
+- after major architectural change
+- after a long idle period when the project may have moved
+- before resuming after compaction if you need full re-orientation
 
 ## Tips
 
-- Use ultrathink throughout — this prep pays dividends for the entire session
-- Do NOT rush Step 4. A thorough investigation prevents mistakes that are expensive to fix
-- AGENTS.md is the authoritative source; if README.md conflicts with it, AGENTS.md wins
-- If you find something undocumented or surprising, note it before continuing
-- This skill supersedes `ntm-start-agent` for initial orientation
+- This skill is orientation only. It prepares you to work; it does not replace the worker loop.
+- If AGENTS and another doc disagree, follow AGENTS' stated authority order rather than making assumptions.
+- Prefer the project's own machine-readable surfaces over ad hoc exploration when they exist.
+- This skill supersedes `ntm-start-agent` for initial orientation.

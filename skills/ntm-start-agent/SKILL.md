@@ -1,129 +1,90 @@
 ---
 name: ntm-start-agent
-description: Initialize a worker agent with full project context and coordination protocols
-version: 3.0.0
+description: Start or resume a worker agent, register in the correct project, and keep looping through actionable work with strong communication discipline
+version: 2.1.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "startup", "coordination"]
 ---
-# Agent Startup Instructions
+# Worker Agent Loop
 
-Read ALL of AGENTS.md super carefully before doing anything else. Pay special attention to:
+Use this after orientation is complete.
 
-1. **Rule Number 1** — NEVER delete files without explicit permission
-2. **Automatic Skill Triggers** — You MUST follow these triggers automatically
-3. **Git Workflow** — Do NOT push yourself; notify the git manager after committing
-4. **Tech Stack & Check Commands** — Note the exact commands for this project; do not assume
+If you have not already oriented yourself to the project, run `/ntm-project-prep` first.
+If you are returning from compaction or a long idle period and only need rehydration, run `/ntm-reread-agents` first.
 
-Then use your code investigation agent mode to understand the codebase architecture.
+## Step 1: Reclaim the Correct Identity
 
-## Required Setup
+If you are resuming the same pane/role after compaction or idle time, reuse the same agent identity.
 
-1. **Check for `./robot`** — if it doesn't exist, run `/robot-mode-maker` first
-2. **Get project health snapshot**: `./robot status --json` (or `bv --robot-triage` fallback)
-3. **Establish your agent identity** using the Session Identity Protocol below
-4. **Check your inbox** and respond to any pending messages
+Rules:
+- do not mint a new identity just because memory was compacted
+- do not mint a new identity just because the project was quiet
+- only create a new identity for a genuinely new concurrent worker
+- register or resume in the exact project AGENTS specifies
+- if your original identity cannot be recovered, prefer a dormant unclaimed project identity that satisfies the idle-reuse threshold defined by AGENTS and has no active obligations over creating a brand-new one
 
-## Session Identity Protocol
+## Step 2: Rejoin Swarm Coordination
 
-Agent identities must persist across context compactions. Follow this protocol:
+Before taking work:
+- register or resume in the correct project
+- check inbox and respond to pending messages
+- reconstruct your current assignment if you were already working something
+- announce availability or resumed activity to the swarm
 
-### Step 1: Determine Your Session UUID
+## Step 3: Enter the Continuous Worker Loop
 
-```bash
-# Get the project directory from pwd or AGENTS.md
-PROJECT_DIR=$(pwd)
+Remain in this loop until there is no actionable work left, you are explicitly reassigned, or your role changes.
 
-# Find the Claude projects directory for this project
-# Replace / with - to match Claude's directory naming
-PROJECT_SLUG=$(echo "$PROJECT_DIR" | sed 's|^/||; s|/|-|g')
-CLAUDE_PROJECT_DIR="$HOME/.claude/projects/-$PROJECT_SLUG"
+### Worker loop
 
-# Get your session UUID (most recently modified transcript)
-SESSION_UUID=$(basename "$(ls -t "$CLAUDE_PROJECT_DIR"/*.jsonl 2>/dev/null | head -1)" .jsonl)
-echo "Session UUID: $SESSION_UUID"
-```
+1. Check inbox.
+2. If you already own active work, continue that work first.
+3. Otherwise pick the next actionable task using the project task-selection flow from AGENTS.
+4. Claim the task using the project task tracker.
+5. Reserve the files or surface you need before editing.
+6. Announce start in the coordination channel.
+7. Implement methodically.
+8. Check inbox again at natural checkpoints and after substantive changes.
+9. Self-review and run the project quality gates.
+10. Close or update the task, sync task metadata, and release reservations.
+11. Commit your logical unit and follow the project's git protocol.
+12. Notify the git manager or follow the project's commit handoff rules.
+13. Check inbox again.
+14. Repeat.
 
-### Step 2: Check for Existing Identity
+## Step 4: If the Queue Appears Empty
 
-```bash
-# Create project hash for identity directory
-PROJECT_HASH=$(echo -n "$PROJECT_DIR" | md5sum | cut -c1-12)
-IDENTITY_DIR="$HOME/.claude/agent-identities/$PROJECT_HASH"
-IDENTITY_FILE="$IDENTITY_DIR/$SESSION_UUID.json"
+If there is no actionable unclaimed work at the moment:
+- check inbox again to see whether another agent needs help
+- run `/ntm-review-others` to perform productive cross-agent review
+- if the queue looks stuck, run `/ntm-unstall`
+- re-check the queue after that
 
-# Check if identity exists
-if [ -f "$IDENTITY_FILE" ]; then
-    echo "Found existing identity:"
-    cat "$IDENTITY_FILE"
-    AGENT_NAME=$(jq -r '.agent_name' "$IDENTITY_FILE")
-else
-    echo "No existing identity for this session"
-    AGENT_NAME=""
-fi
-```
+Do not stop just because one bead finished.
+Do not stop to write a project-wide summary to the user unless explicitly asked, or unless no actionable work remains and the operator needs status.
 
-### Step 3: Register with MCP Agent Mail
+## Communication Expectations
 
-Call `macro_start_session` with the project's `human_key` (the absolute project path):
+Minimum cadence:
+- at session start
+- after claiming work
+- before editing a newly reserved file set
+- after substantive implementation steps
+- before commit
+- after commit
+- before selecting the next task
 
-- **If identity file exists:** Use the `agent_name` from the file
-- **If no identity file:** Omit `agent_name` to auto-generate one
-
-```
-mcp__mcp-agent-mail__macro_start_session
-  human_key: "<PROJECT_DIR>"
-  agent_name: "<AGENT_NAME or omit>"
-  agent_role: "Brief description of your role"
-```
-
-### Step 4: Save Your Identity
-
-After successful registration, save your identity for recovery after compaction:
-
-```bash
-mkdir -p "$IDENTITY_DIR"
-cat > "$IDENTITY_FILE" << EOF
-{
-  "agent_name": "<YOUR_AGENT_NAME>",
-  "role": "<YOUR_ROLE>",
-  "project_key": "$PROJECT_DIR",
-  "created_at": "$(date -Iseconds)"
-}
-EOF
-```
-
-## Starting Work
-
-1. Find priority work: `./robot next --json` (or `bv --robot-next`)
-2. Claim the bead: `./robot claim <id>` (or `br update <id> --status in_progress`)
-3. Notify agents via MCP Agent Mail what you're working on
-4. Implement the task systematically — comply with AGENTS.md and best practice guides
-5. Before closing: run `/ntm-review-own` to catch bugs with fresh eyes
-6. Close and sync: `./robot done <id>` (or `br close <id>` + `br sync --flush-only`)
-7. Commit code and `.beads/` together; notify the git manager — do NOT push yourself
-8. Loop: run `/ntm-next-bead`
-
-Don't get stuck in "communication purgatory" — be proactive about starting tasks, but always mark beads and inform fellow agents.
-
-Use ultrathink.
-
-## Required Tools
-
-- **MCP Agent Mail** — inter-agent coordination
-- **`./robot`** — standardized project operations (status, next, claim, done, build, files)
-- **`bv`** (beads_viewer) — priority-based task selection (fallback if `./robot` unavailable)
-- **`br`** (beads_rust) — issue and task tracking
+If you are heads-down for a long stretch, poll inbox anyway.
 
 ## When to Use
 
-- At the start of a new worker agent session
-- When spawning worker agents in an NTM swarm
-- To get agents oriented and productive quickly
+- at the start of a worker session after orientation
+- after compaction once context is rehydrated
+- when resuming a previously active worker
 
 ## Tips
 
-- Send to worker agents only — not the git manager (use `/ntm-git-manager` for that)
-- Always claim beads before starting to prevent duplicate work
-- All coordination happens through MCP Agent Mail
-- Identity files are stored globally in `~/.claude/agent-identities/` to survive fresh clones
+- This is the main worker-loop skill. It should keep the agent moving without needing another prompt after each bead.
+- If you are directly assigned a specific bead, continue the loop from that starting point instead of re-triaging.
+- Follow project-specific commands from AGENTS rather than hardcoding assumptions into your behavior.
