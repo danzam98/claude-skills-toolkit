@@ -1,14 +1,14 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 44 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, and automate workflows.
+A comprehensive collection of 44 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, automate workflows, and run disciplined NTM swarms.
 
-All skills created or inspired by Jeffrey Emanuel. 
+Includes skills created or inspired by Jeffrey Emanuel alongside project workflow and swarm coordination skills.
 
 ## Quick Install
 
 ### Option A: Download the Zip
 
-A pre-built [`claude-skills-md.zip`](https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip) contains all 44 skill markdown files in a single download:
+A pre-built [`claude-skills-md.zip`](https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip) contains the full skill bundle in a single download:
 
 ```bash
 curl -fsSL https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip -o claude-skills-md.zip
@@ -129,20 +129,21 @@ br init
 
 This creates the `.beads/` directory. Commit it alongside all future code changes.
 
-### 4. Create the `./robot` agent CLI
+### 4. Create project-local machine-readable surfaces when useful
 
 In Claude Code, run:
 ```
 /robot-mode-maker
 ```
 
-This generates a project-level `./robot` CLI tailored to your project. All NTM skills use this as their primary interface.
+This generates a project-level `./robot` CLI tailored to your project. NTM skills can use project-local machine-readable surfaces like `./robot` when a project provides them, but they do not require `./robot` specifically.
 
 ### 5. Start working
 
 **Single agent:**
 ```
 /ntm-project-prep
+/ntm-start-agent
 ```
 
 **Multi-agent swarm (requires tmux + NTM):**
@@ -217,24 +218,24 @@ This generates a project-level `./robot` CLI tailored to your project. All NTM s
 
 ### NTM Swarm Skills (12 skills)
 
-> **NTM (Named Tmux Manager)** is a multi-agent orchestration pattern where multiple Claude agents work in parallel on a single project, coordinated through a shared task queue (beads), MCP Agent Mail for inter-agent messaging, and designated roles. These skills are purpose-built for NTM swarm workflows.
+> **NTM (Named Tmux Manager)** is a multi-agent orchestration pattern where multiple Claude agents work in parallel on a single project, coordinated through a shared task queue (beads), MCP Agent Mail for inter-agent messaging, and a small number of sticky coordination roles when necessary. These skills are purpose-built for NTM swarm workflows.
 >
-> NTM skills are **framework-agnostic** — they work with any project type (Next.js, Rails, Vite, HTML mockups, CLIs, etc.). Project-specific commands and paths live in `AGENTS.md`; the skills contain only workflow and reasoning logic. All skills use `./robot` as their primary interface when present, with graceful fallbacks to raw `bv`/`br`/`git` commands when not.
+> NTM skills are **framework-agnostic** — they work with any project type (Next.js, Rails, Vite, HTML mockups, CLIs, etc.). Project-specific commands and paths live in `AGENTS.md`; the skills contain workflow, recovery, and coordination logic. They prefer the project’s own authority chain and machine-readable surfaces, whether that is `./robot` or something else.
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| **NTM Project Prep** | `/ntm-project-prep` | Deep project orientation — reads AGENTS.md, follows its authority chain, and inspects the project surfaces it names before doing any work |
-| **NTM Start Agent** | `/ntm-start-agent` | Start or resume a worker agent, register in the correct project, and keep looping through actionable work with strong communication discipline |
-| **NTM Next Bead** | `/ntm-next-bead` | Re-enter the worker loop by picking, claiming, and starting the next actionable task using the project's task-selection flow |
-| **NTM Git Manager** | `/ntm-git-manager` | Run the dedicated git-coordination loop for a swarm while preserving the same role and identity across compaction and idle periods |
+| **NTM Project Prep** | `/ntm-project-prep` | Read `AGENTS.md`, follow the project’s authority chain, inspect live project surfaces, and recover the correct identity lease before work starts |
+| **NTM Start Agent** | `/ntm-start-agent` | Resume a fungible worker loop that checks mail, claims work, reserves files, reviews, and keeps moving without waiting for re-prompts |
+| **NTM Next Bead** | `/ntm-next-bead` | Re-enter the worker loop by checking coordination state, continuing owned work first, or taking the next actionable task |
+| **NTM Git Manager** | `/ntm-git-manager` | Run the sticky git-coordination role for a swarm, preserve the same identity lease, and keep landing work clean |
 | **NTM Commit All** | `/ntm-commit-all` | Commit all pending changes in logical groupings with beads sync; notifies git manager to push |
-| **NTM Reread Agents** | `/ntm-reread-agents` | Recover cleanly after compaction by reclaiming the same identity, re-reading project authority surfaces, and reconstructing current work before resuming |
+| **NTM Reread Agents** | `/ntm-reread-agents` | Recover cleanly after compaction by reclaiming the same identity lease, re-reading authority surfaces, and reconstructing current work before resuming |
 | **NTM Review Own** | `/ntm-review-own` | Agent self-review quality gate using project check commands from AGENTS.md |
-| **NTM Review Others** | `/ntm-review-others` | Perform cross-agent review to catch integration issues and keep the swarm productive when direct implementation work is temporarily unavailable |
+| **NTM Review Others** | `/ntm-review-others` | Perform cross-agent review and fresh-eyes exploration to keep the swarm productive when direct implementation work is temporarily thin |
 | **NTM Bug Hunt** | `/ntm-bug-hunt` | Random codebase exploration using `./robot files` for file discovery, then deep bug investigation |
 | **NTM Test Coverage** | `/ntm-test-coverage` | Audit and expand test coverage with comprehensive logging |
 | **NTM UI Polish** | `/ntm-ui-polish` | UI/UX refinement pass for world-class visual polish |
-| **NTM Unstall** | `/ntm-unstall` | Recover a stalled swarm queue by identifying abandoned in-progress tasks, reopening them safely, and returning the swarm to productive work |
+| **NTM Unstall** | `/ntm-unstall` | Recover a stalled swarm queue by conservatively reopening abandoned work and returning fungible workers to productive motion |
 
 ### Infrastructure (1 skill)
 
@@ -373,9 +374,11 @@ NTM skills separate **workflow logic** from **project specifics**:
 
 This means the same skill works identically on a Next.js app, a Vite HTML prototype, a Rails API, or a CLI tool — the skill never assumes a framework. When an agent reads AGENTS.md at startup, it learns everything project-specific; the skills just tell it how to behave.
 
-**`./robot` integration:** NTM skills use a project-level `./robot` CLI as their primary interface for common operations (status checks, bead claim/close, builds, file discovery). Use `/robot-mode-maker` to generate `./robot` for any project. All NTM skills fall back gracefully to raw `bv`/`br`/`git` commands when `./robot` is absent.
+**Project-local machine-readable surfaces:** NTM skills prefer whatever live surfaces the project declares in `AGENTS.md`, such as `./robot` or other CLI/status tools. Use `/robot-mode-maker` when you want a project-local CLI, but the NTM suite is not hardcoded to require it.
 
-**Git discipline:** Worker agents never push to remote. The dedicated git manager (initialized with `/ntm-git-manager`) is the sole agent that runs `git push`. Worker agents commit locally and notify the git manager via MCP Agent Mail.
+**Fungible workers, sticky exceptions:** Workers are generalists that pull from the same actionable queue. Sticky roles such as the git manager are deliberate exceptions and should preserve the same identity across compaction or long idle periods.
+
+**Git discipline:** Worker agents never push to remote. The dedicated git manager (initialized with `/ntm-git-manager`) is the sole agent that runs `git push` when the project’s policy assigns pushes to that role. Worker agents commit locally and notify the git manager via MCP Agent Mail.
 
 ---
 
@@ -411,14 +414,14 @@ This means the same skill works identically on a Next.js app, a Vite HTML protot
 
 ### NTM Swarm Workflow
 ```
-0. /robot-mode-maker        # Create ./robot CLI (one-time project setup)
-1. /ntm-project-prep        # Deep orientation: AGENTS.md, README, full codebase
-2. /ntm-git-manager         # Dedicate one agent as sole git coordinator
-3. /ntm-start-agent         # Boot each worker agent with coordination protocols
-4. /ntm-next-bead           # Each agent picks up, implements, and loops on tasks
+1. /ntm-project-prep        # Read AGENTS and recover the correct identity
+2. /ntm-git-manager         # Keep one sticky landing and push role
+3. /ntm-start-agent         # Start each fungible worker loop
+4. /ntm-next-bead           # Re-enter task pickup after a completed bead
 5. /ntm-review-own          # Self-review quality gate before closing each bead
-6. /ntm-review-others       # Cross-review parallel streams periodically
-7. /ntm-commit-all          # Commit everything in logical order (git manager pushes)
+6. /ntm-review-others       # Cross-review or fresh-eyes fallback when the queue is thin
+7. /ntm-reread-agents       # Recover cleanly after compaction
+8. /ntm-unstall             # Reopen only confirmed abandoned work when the queue stalls
 ```
 
 ---

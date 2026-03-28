@@ -1,62 +1,36 @@
 ---
 name: ntm-reread-agents
-description: Recover cleanly after compaction by reclaiming the same identity, re-reading project authority surfaces, and reconstructing current work before resuming
-version: 2.1.0
+description: Recover cleanly after compaction by reclaiming the same identity lease, re-reading authority surfaces, and reconstructing current work before resuming
+version: 2.2.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "context", "refresh"]
 ---
 # Rehydrate After Compaction
 
-Use this after memory compaction or after returning from a long idle period when you need to reconstruct context without inventing a new identity.
+Use this after memory compaction or after returning from a long idle period when you need to reconstruct state without creating identity drift.
 
-## Step 1: Reclaim the Same Identity
+## Recovery Order
 
-Before doing anything else:
-- reuse your prior identity if this is the same pane/role
-- do not register a fresh identity just because memory was compacted
-- do not register a fresh identity just because the project was quiet
-- if you do not remember your identity, recover it from the project coordination system before acting
-- if you truly cannot recover your original identity, prefer a dormant unclaimed project identity that satisfies the idle-reuse threshold defined by AGENTS and has no active obligations over minting a new one
+1. Reclaim the same identity lease for the same pane and role.
+2. Re-read `AGENTS.md` fully.
+3. Follow AGENTS' authority order and re-read the project surfaces it names.
+4. Reconstruct inbox state, active threads, reservations, current queue state, and any work or sticky role you already own.
+5. Resume the correct loop: worker, git manager, or queue recovery.
 
-## Step 2: Re-read the Project Authority Surfaces
+## Identity Lease Rules
 
-Re-read `AGENTS.md` fully.
+- Do not register a fresh identity just because memory was compacted.
+- Do not register a fresh identity just because the project was quiet.
+- If you do not remember your identity, recover it from the coordination system before acting.
+- If exact reclaim fails, only adopt a dormant compatible identity lease when project rules allow it and the identity has no active obligations.
+- If you cannot safely reclaim or adopt a compatible lease, stop and escalate instead of creating a new agent footprint.
 
-Then follow AGENTS' authority order and re-read the authoritative project-specific surfaces it names, such as:
-- the primary architecture or north-star doc
-- aligned plan or migration docs
-- README
-- project CLI docs and status surfaces
-- repo-owned project skill definitions
+## Resume Rules
 
-Do not assume which files matter; let AGENTS tell you.
+- If you already own active work, resume it.
+- If you are the git manager, return to the git-manager loop.
+- If you are a worker with no active task, return to the worker loop or use `/ntm-next-bead`.
+- If there is no actionable work, use `/ntm-review-others` or `/ntm-unstall`, then re-check.
 
-## Step 3: Reconstruct State
-
-Recover the current state before taking action:
-- check inbox and recent message threads
-- inspect current project status
-- inspect the current queue / task state
-- determine whether you already own an active task or sticky role
-- reconstruct any file reservations or pending handoffs that matter
-
-## Step 4: Resume Correctly
-
-If you already own active work, resume it.
-If you are the git manager, return to the git-manager loop.
-If you are a worker with no active task, return to the worker loop or use `/ntm-next-bead`.
-If there is no actionable work, use `/ntm-review-others` or `/ntm-unstall`, then re-check.
-
-Do not stop to write a project-wide summary to the user unless explicitly asked or unless no actionable work remains and status is needed.
-
-## When to Use
-
-- immediately after compaction
-- after a long idle period when the project may have moved
-- whenever you realize you have lost the current project state
-
-## Tips
-
-- This is the default recovery path after compaction.
-- The goal is to continue work with the same role and identity, not to create a new agent footprint.
+Do not stop to write a user-facing project summary unless explicitly asked or unless no actionable work remains and status is required.

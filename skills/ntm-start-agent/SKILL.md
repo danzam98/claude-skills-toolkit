@@ -1,90 +1,78 @@
 ---
 name: ntm-start-agent
-description: Start or resume a worker agent, register in the correct project, and keep looping through actionable work with strong communication discipline
-version: 2.1.0
+description: Resume a fungible worker and keep the bead loop moving with mail, reservations, review, and conservative recovery
+version: 2.2.0
 author: Daniel Fischer
 category: automation
 tags: ["ntm", "multi-agent", "swarm", "startup", "coordination"]
 ---
 # Worker Agent Loop
 
-Use this after orientation is complete.
+You are a fungible worker unless the project explicitly gives you a sticky coordination role.
 
-If you have not already oriented yourself to the project, run `/ntm-project-prep` first.
-If you are returning from compaction or a long idle period and only need rehydration, run `/ntm-reread-agents` first.
+Do not wait for a central dispatcher if the queue is actionable.
+Do not wait for a fresh prompt after each bead.
+A finished bead is a cue to continue, not to stop.
 
-## Step 1: Reclaim the Correct Identity
+If you are not oriented yet, run `/ntm-project-prep` first.
+If you are recovering after compaction or idle time, run `/ntm-reread-agents` first.
 
-If you are resuming the same pane/role after compaction or idle time, reuse the same agent identity.
+## Identity Lease
 
-Rules:
-- do not mint a new identity just because memory was compacted
-- do not mint a new identity just because the project was quiet
-- only create a new identity for a genuinely new concurrent worker
-- register or resume in the exact project AGENTS specifies
-- if your original identity cannot be recovered, prefer a dormant unclaimed project identity that satisfies the idle-reuse threshold defined by AGENTS and has no active obligations over creating a brand-new one
+- Reclaim the same leased identity when returning to the same pane and role.
+- Do not mint a new identity because memory was compacted.
+- Do not mint a new identity because the project was quiet.
+- Only create a new identity for a genuinely new concurrent worker or with explicit operator intent.
+- If exact reclaim fails, only adopt a dormant compatible worker lease when project rules allow it and the identity has no active obligations.
+- If you cannot recover a safe worker identity, stop and escalate instead of creating drift.
 
-## Step 2: Rejoin Swarm Coordination
+## Startup
 
-Before taking work:
-- register or resume in the correct project
-- check inbox and respond to pending messages
-- reconstruct your current assignment if you were already working something
-- announce availability or resumed activity to the swarm
+1. Resume or register in the exact project `AGENTS.md` specifies.
+2. Check inbox and current threads.
+3. If you already own active work, resume it.
+4. Otherwise announce availability and take the next actionable task.
 
-## Step 3: Enter the Continuous Worker Loop
-
-Remain in this loop until there is no actionable work left, you are explicitly reassigned, or your role changes.
-
-### Worker loop
+## Continuous Worker Loop
 
 1. Check inbox.
-2. If you already own active work, continue that work first.
-3. Otherwise pick the next actionable task using the project task-selection flow from AGENTS.
-4. Claim the task using the project task tracker.
-5. Reserve the files or surface you need before editing.
-6. Announce start in the coordination channel.
-7. Implement methodically.
-8. Check inbox again at natural checkpoints and after substantive changes.
-9. Self-review and run the project quality gates.
-10. Close or update the task, sync task metadata, and release reservations.
-11. Commit your logical unit and follow the project's git protocol.
-12. Notify the git manager or follow the project's commit handoff rules.
-13. Check inbox again.
-14. Repeat.
+2. Continue owned work first; otherwise pick the highest-impact actionable task using the project task flow.
+3. Claim it.
+4. Reserve the files or work surface you need.
+5. Announce start to the swarm.
+6. Implement methodically.
+7. Poll inbox at natural checkpoints and after substantive changes.
+8. Self-review and run the required project quality gates.
+9. Close or update the task, sync task metadata, and release reservations.
+10. Commit your logical unit and follow the project's git handoff rules.
+11. Check inbox again.
+12. Repeat.
 
-## Step 4: If the Queue Appears Empty
+## If the Queue Is Thin
 
-If there is no actionable unclaimed work at the moment:
-- check inbox again to see whether another agent needs help
-- run `/ntm-review-others` to perform productive cross-agent review
-- if the queue looks stuck, run `/ntm-unstall`
-- re-check the queue after that
+Do not idle.
 
-Do not stop just because one bead finished.
-Do not stop to write a project-wide summary to the user unless explicitly asked, or unless no actionable work remains and the operator needs status.
+- Run `/ntm-review-others` for cross-agent review.
+- Do fresh-eyes exploration near active integration surfaces if that is useful and consistent with project rules.
+- Run `/ntm-unstall` if the queue appears stuck or abandoned.
+- Re-check the queue and continue.
 
-## Communication Expectations
+## Communication Discipline
 
 Minimum cadence:
 - at session start
 - after claiming work
-- before editing a newly reserved file set
+- before editing a newly reserved surface
 - after substantive implementation steps
 - before commit
 - after commit
-- before selecting the next task
+- before selecting the next bead
 
-If you are heads-down for a long stretch, poll inbox anyway.
-
-## When to Use
-
-- at the start of a worker session after orientation
-- after compaction once context is rehydrated
-- when resuming a previously active worker
+Keep the swarm informed.
+Do not stop the bead loop to give the user a project-wide summary unless explicitly asked or unless no actionable work remains and status is needed.
 
 ## Tips
 
-- This is the main worker-loop skill. It should keep the agent moving without needing another prompt after each bead.
-- If you are directly assigned a specific bead, continue the loop from that starting point instead of re-triaging.
-- Follow project-specific commands from AGENTS rather than hardcoding assumptions into your behavior.
+- Follow project-specific commands from `AGENTS.md` rather than hardcoding assumptions.
+- Direct assignment overrides generic triage.
+- The operator should not need to re-prompt you after each bead.
