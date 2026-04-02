@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 44 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, automate workflows, and run disciplined NTM swarms.
+A comprehensive collection of 48 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, automate workflows, and run disciplined NTM swarms.
 
 Includes skills created or inspired by Jeffrey Emanuel alongside project workflow and swarm coordination skills.
 
@@ -196,7 +196,7 @@ This generates a project-level `./robot` CLI tailored to your project. NTM skill
 | **E2E Pipeline Validator** | `/e2e-pipeline-validator` | Prove the entire system works with real data, no mocks allowed |
 | **Deployment Verifier** | `/deployment-verifier` | Verify live deployment works with automated browser testing |
 
-### Automation & Agents (5 skills)
+### Automation & Agents (7 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
@@ -205,6 +205,8 @@ This generates a project-level `./robot` CLI tailored to your project. NTM skill
 | **CLI Error Tolerance** | `/cli-error-tolerance` | Make CLI tools forgiving of minor syntax issues for agent ergonomics |
 | **Git Committer** | `/git-committer` | Intelligently commit all changed files in logical groupings with detailed messages |
 | **Ralph** | `/ralph` | Convert PRDs to JSON format for the Ralph autonomous agent system |
+| **Repeatedly Apply Skill** | `/repeatedly-apply-skill` | Iteratively apply any skill N times with progressive deepening and subagent delegation |
+| **Beads Workflow** | `/beads-workflow` | Convert markdown plans into actionable beads with dependencies, polishing, and swarm-ready task graphs |
 
 ### Workflow & Documentation (5 skills)
 
@@ -365,6 +367,53 @@ Analyze any codebase and produce a professional development cost estimate suitab
 
 ---
 
+### Repeatedly Apply Skill - Iterative Multi-Pass Improvement
+Orchestrate N passes of any skill against a target, each delegated to a fresh subagent with a unique mission.
+
+**How it works:**
+1. Reads the target skill and generates N domain-specific missions
+2. Creates a `.skill-loop-progress.md` tracking file
+3. Delegates each pass to a fresh subagent (no accumulated fatigue)
+4. Verifies, commits, and logs each pass before proceeding
+5. Stops on convergence, thrashing, or pass cap
+
+**When to use:**
+- When one pass of a skill isn't enough
+- For iterative polish (UI, docs, bug scanning)
+- When you want systematic, progressive deepening
+
+```
+/repeatedly-apply-skill 10 /ui-polish      # 10 passes of UI polish
+/repeatedly-apply-skill 5 /ubs             # 5 passes of bug scanning
+```
+
+---
+
+### Beads Workflow - Plan to Task Graph
+Convert markdown plans into actionable beads (tasks) with dependencies using the `br` CLI.
+
+**How it works:**
+1. Takes a markdown plan and converts it to granular beads
+2. Adds dependency structure (what blocks what)
+3. Iterative polishing (6-9 rounds) until steady-state
+4. Validates with `br dep cycles` and `bv --robot-insights`
+
+**When to use:**
+- Before starting implementation of a plan
+- When coordinating multi-agent swarms
+- To bridge planning to execution
+
+**Includes reference files:**
+- `BEAD-ANATOMY.md` — What makes a good bead
+- `PROMPTS.md` — Complete prompt reference for conversion and polishing
+- `TROUBLESHOOTING.md` — Worktree errors, sync issues, migration guide
+
+```
+/beads-workflow
+```
+
+---
+
 ### NTM Skills — Design Philosophy
 
 NTM skills separate **workflow logic** from **project specifics**:
@@ -466,6 +515,8 @@ mkdir -p ~/.claude/skills/robot-mode-maker && curl -fsSL https://raw.githubuserc
 mkdir -p ~/.claude/skills/cli-error-tolerance && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/cli-error-tolerance/SKILL.md -o ~/.claude/skills/cli-error-tolerance/SKILL.md
 mkdir -p ~/.claude/skills/git-committer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/git-committer/SKILL.md -o ~/.claude/skills/git-committer/SKILL.md
 mkdir -p ~/.claude/skills/ralph && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/ralph/SKILL.md -o ~/.claude/skills/ralph/SKILL.md
+mkdir -p ~/.claude/skills/repeatedly-apply-skill && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/repeatedly-apply-skill/SKILL.md -o ~/.claude/skills/repeatedly-apply-skill/SKILL.md
+mkdir -p ~/.claude/skills/beads-workflow/references && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/beads-workflow/SKILL.md -o ~/.claude/skills/beads-workflow/SKILL.md && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/beads-workflow/references/PROMPTS.md -o ~/.claude/skills/beads-workflow/references/PROMPTS.md && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/beads-workflow/references/BEAD-ANATOMY.md -o ~/.claude/skills/beads-workflow/references/BEAD-ANATOMY.md && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/beads-workflow/references/TROUBLESHOOTING.md -o ~/.claude/skills/beads-workflow/references/TROUBLESHOOTING.md
 
 # Workflow & Documentation
 mkdir -p ~/.claude/skills/deep-project-primer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/deep-project-primer/SKILL.md -o ~/.claude/skills/deep-project-primer/SKILL.md
