@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-58 skills for Claude Code covering code review, planning, UI/UX, testing, automation, and NTM swarm coordination.
+58 skills for Claude Code and Codex CLI covering code review, planning, UI/UX, testing, automation, and NTM swarm coordination. The same SKILL.md format works in both CLIs, and the installer writes to both by default.
 
 Includes skills created or inspired by Jeffrey Emanuel alongside project workflow and swarm coordination skills.
 
@@ -12,7 +12,12 @@ A pre-built [`claude-skills-md.zip`](https://github.com/danzam98/claude-skills-t
 
 ```bash
 curl -fsSL https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip -o claude-skills-md.zip
+
+# Claude Code
 unzip claude-skills-md.zip -d ~/.claude/skills/
+
+# Codex CLI
+unzip claude-skills-md.zip -d ~/.codex/skills/
 ```
 
 ### Option B: Clone and Install
@@ -34,31 +39,38 @@ install.bat
 ### Installer Options
 
 ```bash
-./install.sh                         # Install all skills (interactive)
-./install.sh --all --force           # Install all, overwrite existing
-./install.sh fresh-eyes bug-hunt     # Install specific skills
-./install.sh -f peer-review          # Install with overwrite
-./install.sh --list                  # List available skills
-./install.sh --help                  # Show help
+./install.sh                              # Install all skills to Claude + Codex (interactive)
+./install.sh --all --force                # Install all, overwrite existing
+./install.sh fresh-eyes bug-hunt          # Install specific skills (Claude + Codex)
+./install.sh --target=claude fresh-eyes   # Install only to Claude Code
+./install.sh --target=codex bug-hunt      # Install only to Codex CLI
+./install.sh -f peer-review               # Install with overwrite
+./install.sh --list                       # List available skills
+./install.sh --help                       # Show help
 ```
+
+By default, every install writes to both `~/.claude/skills/` and `~/.codex/skills/`. Use `--target=claude` or `--target=codex` to install to only one CLI.
 
 ### Install Individual Skills
 
 **Mac/Linux:**
 ```bash
-# One-liner to install a specific skill (replace SKILL_NAME)
-mkdir -p ~/.claude/skills/SKILL_NAME && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/SKILL_NAME/SKILL.md -o ~/.claude/skills/SKILL_NAME/SKILL.md
+# One-liner to install a specific skill into both CLIs (replace SKILL_NAME)
+mkdir -p ~/.claude/skills/SKILL_NAME ~/.codex/skills/SKILL_NAME && \
+  curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/SKILL_NAME/SKILL.md -o ~/.claude/skills/SKILL_NAME/SKILL.md && \
+  cp ~/.claude/skills/SKILL_NAME/SKILL.md ~/.codex/skills/SKILL_NAME/SKILL.md
 
 # Examples:
-mkdir -p ~/.claude/skills/fresh-eyes && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md
-mkdir -p ~/.claude/skills/bug-hunt && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/bug-hunt/SKILL.md -o ~/.claude/skills/bug-hunt/SKILL.md
+mkdir -p ~/.claude/skills/fresh-eyes ~/.codex/skills/fresh-eyes && \
+  curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/fresh-eyes/SKILL.md -o ~/.claude/skills/fresh-eyes/SKILL.md && \
+  cp ~/.claude/skills/fresh-eyes/SKILL.md ~/.codex/skills/fresh-eyes/SKILL.md
 ```
 
 **Or clone and copy specific skills:**
 ```bash
 git clone https://github.com/danzam98/claude-skills-toolkit.git
 cp -r claude-skills-toolkit/skills/fresh-eyes ~/.claude/skills/
-cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
+cp -r claude-skills-toolkit/skills/fresh-eyes ~/.codex/skills/
 ```
 
 ---
@@ -66,7 +78,7 @@ cp -r claude-skills-toolkit/skills/bug-hunt ~/.claude/skills/
 ## Prerequisites
 
 ### For all skills
-- [Claude Code](https://claude.ai/code) installed and configured
+- [Claude Code](https://claude.ai/code) and/or [Codex CLI](https://github.com/openai/codex) installed and configured. Codex CLI version 0.118.0 or newer reads `~/.codex/skills/` using the same SKILL.md format as Claude Code.
 
 ### For NTM Swarm skills (`ntm-*`)
 
@@ -467,7 +479,7 @@ This means the same skill works identically on a Next.js app, a Vite HTML protot
 
 ## Individual Installation Commands
 
-After cloning, the simplest install path is `./install.sh -f <skill-names>`. The curl commands below also work for skills whose only file is `SKILL.md`. Skills that ship multiple files (with `references/`, `scripts/`, `templates/`, or `examples/` subdirectories) need `./install.sh` or a `git clone` followed by `cp -r`.
+After cloning, the simplest install path is `./install.sh -f <skill-names>`, which writes to both `~/.claude/skills/` and `~/.codex/skills/` by default. Add `--target=claude` or `--target=codex` to limit one CLI. The curl commands below only target `~/.claude/skills/` and only work for skills whose only file is `SKILL.md`; for Codex installs or for skills with `references/`, `scripts/`, `templates/`, or `examples/` subdirectories, use `./install.sh` instead.
 
 ```bash
 # Code Quality
@@ -557,9 +569,10 @@ See [Setting Up a New Project](#setting-up-a-new-project) for the full workflow.
 ## Troubleshooting
 
 **Skills not showing up?**
-- Verify installation: `ls ~/.claude/skills/`
-- Restart Claude Code
+- Verify installation: `ls ~/.claude/skills/` (Claude Code) or `ls ~/.codex/skills/` (Codex CLI)
+- Restart Claude Code or Codex CLI
 - Check file permissions
+- For Codex CLI, confirm you are on version 0.118.0 or newer (`codex --version`)
 
 **Gemini Grounded Research not working?**
 - Verify API key: `echo $GEMINI_API_KEY`
