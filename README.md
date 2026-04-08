@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-A comprehensive collection of 48 powerful skills for Claude Code that help you write better code, catch bugs early, plan effectively, automate workflows, and run disciplined NTM swarms.
+58 skills for Claude Code covering code review, planning, UI/UX, testing, automation, and NTM swarm coordination.
 
 Includes skills created or inspired by Jeffrey Emanuel alongside project workflow and swarm coordination skills.
 
@@ -166,6 +166,11 @@ This generates a project-level `./robot` CLI tailored to your project. NTM skill
 | **Peer Code Reviewer** | `/peer-code-reviewer` | Cross-agent code review to catch issues from parallel work streams |
 | **Plan Review** | `/plan-review` | Validate implementation plans to catch errors and bad assumptions before coding |
 
+**Install just this category:**
+```bash
+./install.sh -f fresh-eyes bug-hunt bug-hunter peer-review peer-code-reviewer plan-review
+```
+
 ### Ideation & Planning (7 skills)
 
 | Skill | Command | Description |
@@ -178,23 +183,58 @@ This generates a project-level `./robot` CLI tailored to your project. NTM skill
 | **Project Opinion** | `/project-opinion-elicitor` | Get honest, critical assessment of the project from the agent's perspective |
 | **System Weaknesses** | `/system-weaknesses` | Identify the weakest parts of the system that need improvement |
 
-### Refactoring & Optimization (6 skills)
+**Install just this category:**
+```bash
+./install.sh -f idea-wizard hundred-to-ten-filter next-best-move prd premortem-planner project-opinion-elicitor system-weaknesses
+```
+
+### UI/UX (6 skills)
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **Stripe-Level UI** | `/stripe-level-ui` | Build polished UI/UX components with strong attention to visual quality |
+| **UI Polish** | `/ui-polish` | Iterative refinement passes for apps that already work and need to look better |
+| **UX Audit** | `/ux-audit` | Systematic UX evaluation using Nielsen heuristics and accessibility checks |
+| **React Component Generator** | `/react-component-generator` | React 19 components with TypeScript, accessibility, and tests built in |
+| **Interactive Visualization Creator** | `/interactive-visualization-creator` | Interactive visualizations for Next.js using SVG, Canvas, Three.js, and Framer Motion |
+| **Admin Page for Next.js Sites** | `/admin-page-for-nextjs-sites` | Cohesive Next.js SaaS admin cockpits covering permissions, audit, analytics, and ops |
+
+**Install just this category:**
+```bash
+./install.sh -f stripe-level-ui ui-polish ux-audit react-component-generator interactive-visualization-creator admin-page-for-nextjs-sites
+```
+
+### Refactoring & Optimization (5 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
 | **Code Reorganizer** | `/code-reorganizer` | Restructure scattered code files into a sensible, intuitive folder structure |
 | **Deep Performance Audit** | `/deep-performance-audit` | Systematic identification of optimization opportunities with proof requirements |
-| **Stripe-Level UI** | `/stripe-level-ui` | Build world-class, polished UI/UX components with intense focus on visual appeal |
 | **Stub Eliminator** | `/stub-eliminator` | Replace all stubs, placeholders, and mocks with production-ready code |
 | **De-Slopify** | `/de-slopify` | Remove telltale AI writing patterns from documentation and text |
 | **Multi-Model Synthesis** | `/multi-model-synthesis` | Blend competing LLM outputs into a superior hybrid plan |
 
-### Testing & Deployment (2 skills)
+**Install just this category:**
+```bash
+./install.sh -f code-reorganizer deep-performance-audit stub-eliminator de-slopify multi-model-synthesis
+```
+
+### Testing & Deployment (7 skills)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
 | **E2E Pipeline Validator** | `/e2e-pipeline-validator` | Prove the entire system works with real data, no mocks allowed |
 | **Deployment Verifier** | `/deployment-verifier` | Verify live deployment works with automated browser testing |
+| **Testing Fuzzing** | `/testing-fuzzing` | Coverage-guided, structure-aware, differential, stateful, and protocol fuzzing with AFL++ CMPLOG, persistent mode, and sanitizers |
+| **Testing Golden Artifacts** | `/testing-golden-artifacts` | Snapshot and approval test suites that freeze known-good outputs and catch regressions via exact comparison |
+| **Testing Real-Service E2E (No Mocks)** | `/testing-real-service-e2e-no-mocks` | Mock-free integration and E2E tests against real databases and APIs with transaction rollback isolation |
+| **E2E Testing for Webapps** | `/e2e-testing-for-webapps` | Next.js, Playwright, and Supabase: OAuth bypass via test users, interactive debugging, visual QA, Electron testing |
+| **Test E2E Webapps** | `/test-e2e-webapps` | Next.js, Playwright, and Supabase: page objects, console monitoring, visual regression, test user provisioning |
+
+**Install just this category:**
+```bash
+./install.sh -f e2e-pipeline-validator deployment-verifier testing-fuzzing testing-golden-artifacts testing-real-service-e2e-no-mocks e2e-testing-for-webapps test-e2e-webapps
+```
 
 ### Automation & Agents (7 skills)
 
@@ -208,6 +248,11 @@ This generates a project-level `./robot` CLI tailored to your project. NTM skill
 | **Repeatedly Apply Skill** | `/repeatedly-apply-skill` | Iteratively apply any skill N times with progressive deepening and subagent delegation |
 | **Beads Workflow** | `/beads-workflow` | Convert markdown plans into actionable beads with dependencies, polishing, and swarm-ready task graphs |
 
+**Install just this category:**
+```bash
+./install.sh -f agent-swarm-launcher robot-mode-maker cli-error-tolerance git-committer ralph repeatedly-apply-skill beads-workflow
+```
+
 ### Workflow & Documentation (5 skills)
 
 | Skill | Command | Description |
@@ -217,6 +262,11 @@ This generates a project-level `./robot` CLI tailored to your project. NTM skill
 | **Gemini Research** | `/gemini-grounded-research` | Web-backed research using Gemini with Google Search grounding for real-time, citation-backed answers |
 | **BD to BR Migration** | `/bd-to-br-migration` | Migrate docs from bd (beads) to br (beads_rust) |
 | **Cost Estimate** | `/cost-estimate` | Estimate development cost of a codebase with LOC analysis, market rates, org overhead, team multipliers, and Claude ROI |
+
+**Install just this category:**
+```bash
+./install.sh -f deep-project-primer readme-reviser gemini-grounded-research bd-to-br-migration cost-estimate
+```
 
 ### NTM Swarm Skills (12 skills)
 
@@ -239,11 +289,21 @@ This generates a project-level `./robot` CLI tailored to your project. NTM skill
 | **NTM UI Polish** | `/ntm-ui-polish` | UI/UX refinement pass for world-class visual polish |
 | **NTM Unstall** | `/ntm-unstall` | Recover a stalled swarm queue by conservatively reopening abandoned work and returning fungible workers to productive motion |
 
+**Install just this category:**
+```bash
+./install.sh -f ntm-project-prep ntm-start-agent ntm-next-bead ntm-git-manager ntm-commit-all ntm-reread-agents ntm-review-own ntm-review-others ntm-bug-hunt ntm-test-coverage ntm-ui-polish ntm-unstall
+```
+
 ### Infrastructure (1 skill)
 
 | Skill | Command | Description |
 |-------|---------|-------------|
 | **RCH** | `/rch` | Remote compilation helper for offloading cargo/gcc/bun builds to workers |
+
+**Install just this category:**
+```bash
+./install.sh -f rch
+```
 
 ---
 
@@ -477,7 +537,7 @@ This means the same skill works identically on a Next.js app, a Vite HTML protot
 
 ## Individual Installation Commands
 
-Copy-paste these commands to install specific skills:
+After cloning, the simplest install path is `./install.sh -f <skill-names>`. The curl commands below also work for skills whose only file is `SKILL.md`. Skills that ship multiple files (with `references/`, `scripts/`, `templates/`, or `examples/` subdirectories) need `./install.sh` or a `git clone` followed by `cp -r`.
 
 ```bash
 # Code Quality
@@ -497,17 +557,22 @@ mkdir -p ~/.claude/skills/premortem-planner && curl -fsSL https://raw.githubuser
 mkdir -p ~/.claude/skills/project-opinion-elicitor && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/project-opinion-elicitor/SKILL.md -o ~/.claude/skills/project-opinion-elicitor/SKILL.md
 mkdir -p ~/.claude/skills/system-weaknesses && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/system-weaknesses/SKILL.md -o ~/.claude/skills/system-weaknesses/SKILL.md
 
+# UI/UX (multi-file skills, install.sh required)
+./install.sh -f stripe-level-ui ui-polish ux-audit react-component-generator interactive-visualization-creator admin-page-for-nextjs-sites
+
 # Refactoring & Optimization
 mkdir -p ~/.claude/skills/code-reorganizer && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/code-reorganizer/SKILL.md -o ~/.claude/skills/code-reorganizer/SKILL.md
 mkdir -p ~/.claude/skills/deep-performance-audit && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/deep-performance-audit/SKILL.md -o ~/.claude/skills/deep-performance-audit/SKILL.md
-mkdir -p ~/.claude/skills/stripe-level-ui && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/stripe-level-ui/SKILL.md -o ~/.claude/skills/stripe-level-ui/SKILL.md
 mkdir -p ~/.claude/skills/stub-eliminator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/stub-eliminator/SKILL.md -o ~/.claude/skills/stub-eliminator/SKILL.md
 mkdir -p ~/.claude/skills/de-slopify && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/de-slopify/SKILL.md -o ~/.claude/skills/de-slopify/SKILL.md
 mkdir -p ~/.claude/skills/multi-model-synthesis && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/multi-model-synthesis/SKILL.md -o ~/.claude/skills/multi-model-synthesis/SKILL.md
 
-# Testing & Deployment
+# Testing & Deployment (single-file skills)
 mkdir -p ~/.claude/skills/e2e-pipeline-validator && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/e2e-pipeline-validator/SKILL.md -o ~/.claude/skills/e2e-pipeline-validator/SKILL.md
 mkdir -p ~/.claude/skills/deployment-verifier && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/deployment-verifier/SKILL.md -o ~/.claude/skills/deployment-verifier/SKILL.md
+
+# Testing & Deployment (multi-file skills, install.sh required)
+./install.sh -f testing-fuzzing testing-golden-artifacts testing-real-service-e2e-no-mocks e2e-testing-for-webapps test-e2e-webapps
 
 # Automation & Agents
 mkdir -p ~/.claude/skills/agent-swarm-launcher && curl -fsSL https://raw.githubusercontent.com/danzam98/claude-skills-toolkit/master/skills/agent-swarm-launcher/SKILL.md -o ~/.claude/skills/agent-swarm-launcher/SKILL.md
