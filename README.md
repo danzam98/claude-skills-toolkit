@@ -8,7 +8,7 @@ Includes skills created or inspired by Jeffrey Emanuel alongside project workflo
 
 ### Option A: Download the Zip
 
-A pre-built [`claude-skills-md.zip`](https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip) contains the full skill bundle in a single download:
+[`claude-skills-md.zip`](https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip) ships every skill in one archive. Unzip it into either or both CLI skill directories:
 
 ```bash
 curl -fsSL https://github.com/danzam98/claude-skills-toolkit/raw/master/claude-skills-md.zip -o claude-skills-md.zip
