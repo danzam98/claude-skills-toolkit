@@ -1,6 +1,6 @@
 # Claude Skills Toolkit
 
-58 skills for Claude Code and Codex CLI covering code review, planning, UI/UX, testing, automation, and NTM swarm coordination. The same SKILL.md format works in both CLIs, and the installer writes to both by default.
+66 skills for Claude Code and Codex CLI covering code review, planning, UI/UX, testing, automation, SaaS & DevOps, and NTM swarm coordination. The same SKILL.md format works in both CLIs, and the installer writes to both by default.
 
 Includes skills created or inspired by Jeffrey Emanuel alongside project workflow and swarm coordination skills.
 
@@ -208,6 +208,28 @@ NTM swarm skills require additional tooling for full functionality. All tools fa
 **Install just this category:**
 ```bash
 ./install.sh -f deep-project-primer readme-reviser gemini-grounded-research bd-to-br-migration cost-estimate
+```
+
+### SaaS & DevOps (10 skills)
+
+End-to-end coverage for shipping and operating a subscription SaaS — payments, billing hardening, analytics, growth, infrastructure, auth, and customer support. Most skills assume Next.js on the front end and Supabase on the back end, but the patterns generalize. Pairs naturally with the **UI/UX** category for product surfaces and **Testing & Deployment** for verification.
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| **Stripe Checkout** | `/stripe-checkout` | Stripe and PayPal subscription checkout for SaaS apps — recurring billing, webhook handling, Next.js with Rust CLI companions |
+| **SaaS Billing Patterns** | `/saas-billing-patterns-for-stripe-and-paypal` | Audit, harden, or implement SaaS subscription billing — webhooks, dunning, duplicate-charge prevention, MRR, security |
+| **SaaS Customer Analytics** | `/saas-customer-analytics` | MRR, churn, behavioral scoring, Monte Carlo revenue projections, and intervention design for subscription businesses |
+| **Supabase** | `/supabase` | Configure Supabase for Next.js SaaS — Drizzle + pooler, Google-only Auth, RLS, and cost optimization |
+| **GA4** | `/ga4` | Configure GA4 + GTM for Next.js SaaS — funnel tracking, scroll depth, CTA clicks, conversions, and feature usage |
+| **A/B Testing** | `/ab-testing` | Home-rolled A/B testing platform with server-side variant assignment, Bayesian analysis, Rust-WASM stats, and contextual bandits |
+| **SEO for SaaS** | `/seo-for-saas-businesses` | Multi-phase SEO + GEO program — technical SEO, Core Web Vitals, AI Overview citations, schema, hreflang, programmatic templates |
+| **SaaS CLI Auth Flow** | `/saas-cli-auth-flow` | CLI-to-web auth — PKCE OAuth, RFC 8628 device code, token lifecycle, and secure local storage |
+| **Support Ticketing System** | `/user-support-ticketing-system-for-saas` | Production-grade support ticketing — schema, SLA engine, APIs, queues, admin/user UI, email, cron |
+| **Support Triage** | `/user-support-triage-for-saas-and-open-source-projects` | Triage support across any project — DB tickets, GitHub issues, Zendesk, Intercom, SLA breaches, refunds, GDPR/CCPA |
+
+**Install just this category:**
+```bash
+./install.sh -f stripe-checkout saas-billing-patterns-for-stripe-and-paypal saas-customer-analytics supabase ga4 ab-testing seo-for-saas-businesses saas-cli-auth-flow user-support-ticketing-system-for-saas user-support-triage-for-saas-and-open-source-projects
 ```
 
 ### NTM Swarm Skills (12 skills)
